@@ -3,42 +3,312 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Git Test Page</title>
+  <title>Kikkumalti - Music for Kids!</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
-      font-family: sans-serif;
+      font-family: 'Nunito', sans-serif;
+      background: #fff9f0;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+      background-size: 300% 300%;
+      animation: gradientShift 6s ease infinite;
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+      letter-spacing: 1px;
+    }
+
+    .logo span { font-size: 1.8rem; }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-left: 1.5rem;
+      text-shadow: 1px 1px 0 rgba(0,0,0,0.15);
+      transition: transform 0.2s;
+      display: inline-block;
+    }
+    nav a:hover { transform: scale(1.1); }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffcece' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-emoji {
+      font-size: 5rem;
+      animation: bounce 1.5s infinite;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-15px); }
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #e63946;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: #555;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #ff6b6b;
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      padding: 0.85rem 2.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 6px 0 #c0392b;
+      transition: transform 0.1s, box-shadow 0.1s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(3px);
+      box-shadow: 0 3px 0 #c0392b;
+    }
+
+    /* Features */
+    .features {
       display: flex;
       justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background: #f0f4f8;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
     }
+
     .card {
       background: white;
-      border-radius: 8px;
-      padding: 2rem 3rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      border-radius: 20px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      width: 200px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      border-top: 5px solid;
+    }
+
+    .card:hover { transform: translateY(-6px); }
+    .card:nth-child(1) { border-color: #ff6b6b; }
+    .card:nth-child(2) { border-color: #feca57; }
+    .card:nth-child(3) { border-color: #48dbfb; }
+    .card:nth-child(4) { border-color: #ff9ff3; }
+
+    .card .icon { font-size: 3rem; margin-bottom: 0.75rem; }
+    .card h3 { font-size: 1.1rem; font-weight: 900; color: #333; margin-bottom: 0.4rem; }
+    .card p  { font-size: 0.9rem; color: #777; }
+
+    /* Song strip */
+    .songs-section {
+      background: linear-gradient(180deg, #fff9f0 0%, #fff0f5 100%);
+      padding: 2rem 2rem 3rem;
       text-align: center;
     }
-    h1 { color: #2d3748; margin-bottom: 0.5rem; }
-    p { color: #718096; }
-    .badge {
-      display: inline-block;
-      background: #48bb78;
-      color: white;
-      border-radius: 4px;
-      padding: 0.25rem 0.75rem;
-      font-size: 0.875rem;
-      margin-top: 1rem;
+
+    .songs-section h2 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: #e63946;
+      margin-bottom: 1.5rem;
     }
+
+    .songs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .song-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
+      width: 260px;
+      transition: transform 0.2s;
+    }
+
+    .song-card:hover { transform: scale(1.03); }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.1s;
+    }
+    .play-btn:hover { transform: scale(1.1); }
+
+    .song-card:nth-child(1) .play-btn { background: #ff6b6b; }
+    .song-card:nth-child(2) .play-btn { background: #feca57; }
+    .song-card:nth-child(3) .play-btn { background: #48dbfb; }
+    .song-card:nth-child(4) .play-btn { background: #ff9ff3; }
+    .song-card:nth-child(5) .play-btn { background: #1dd1a1; }
+    .song-card:nth-child(6) .play-btn { background: #54a0ff; }
+
+    .song-info h4 { font-size: 0.95rem; font-weight: 900; color: #333; }
+    .song-info p  { font-size: 0.8rem; color: #aaa; }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #ccc;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+    footer span { color: #ff6b6b; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Git Test Page</h1>
-    <p>This page was created to test git commit and push.</p>
-    <div class="badge">It works!</div>
-  </div>
+
+  <header>
+    <div class="logo"><span>🎵</span> Kikkumalti</div>
+    <nav>
+      <a href="#">Songs</a>
+      <a href="#">Games</a>
+      <a href="#">Videos</a>
+      <a href="#">Parents</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="hero-emoji">🎶</span>
+    <h1>Music That Makes<br>Kids Dance!</h1>
+    <p>Fun songs, catchy beats and sing-alongs made just for little ones.</p>
+    <a href="#" class="btn">Start Listening 🎧</a>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <div class="icon">🎵</div>
+      <h3>Fun Songs</h3>
+      <p>Catchy tunes kids love to sing</p>
+    </div>
+    <div class="card">
+      <div class="icon">🥁</div>
+      <h3>Beats &amp; Rhythm</h3>
+      <p>Learn rhythm while having fun</p>
+    </div>
+    <div class="card">
+      <div class="icon">🎤</div>
+      <h3>Sing Along</h3>
+      <p>Lyrics on screen for easy singing</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌈</div>
+      <h3>Kid Safe</h3>
+      <p>100% safe content for all ages</p>
+    </div>
+  </section>
+
+  <section class="songs-section">
+    <h2>🎵 Popular Songs</h2>
+    <div class="songs">
+      <div class="song-card">
+        <button class="play-btn">▶️</button>
+        <div class="song-info">
+          <h4>Happy Morning Song</h4>
+          <p>2:34 · Wake-up tunes</p>
+        </div>
+      </div>
+      <div class="song-card">
+        <button class="play-btn">▶️</button>
+        <div class="song-info">
+          <h4>Dance with the Animals</h4>
+          <p>3:10 · Dance & Move</p>
+        </div>
+      </div>
+      <div class="song-card">
+        <button class="play-btn">▶️</button>
+        <div class="song-info">
+          <h4>Colors of the Rainbow</h4>
+          <p>2:50 · Learning Songs</p>
+        </div>
+      </div>
+      <div class="song-card">
+        <button class="play-btn">▶️</button>
+        <div class="song-info">
+          <h4>Bedtime Lullaby</h4>
+          <p>4:00 · Calm & Sleep</p>
+        </div>
+      </div>
+      <div class="song-card">
+        <button class="play-btn">▶️</button>
+        <div class="song-info">
+          <h4>Counting 1 to 10</h4>
+          <p>2:20 · Learning Songs</p>
+        </div>
+      </div>
+      <div class="song-card">
+        <button class="play-btn">▶️</button>
+        <div class="song-info">
+          <h4>Jungle Boogie</h4>
+          <p>3:05 · Dance & Move</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with <span>♥</span> for little music lovers · Kikkumalti &copy; 2026</p>
+  </footer>
+
 </body>
 </html>
