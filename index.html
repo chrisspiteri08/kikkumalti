@@ -16,34 +16,32 @@
       overflow-x: hidden;
     }
 
-    /* Header */
+    /* ── Header ── */
     header {
       background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
       background-size: 300% 300%;
       animation: gradientShift 6s ease infinite;
-      padding: 1.5rem 2rem;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-
     @keyframes gradientShift {
       0%   { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .logo {
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: white;
       text-shadow: 3px 3px 0 rgba(0,0,0,0.15);
-      letter-spacing: 1px;
+      text-decoration: none;
     }
-
-    .logo span { font-size: 1.8rem; }
-
     nav a {
       color: white;
       text-decoration: none;
@@ -56,25 +54,22 @@
     }
     nav a:hover { transform: scale(1.1); }
 
-    /* Hero */
+    /* ── Hero ── */
     .hero {
       text-align: center;
       padding: 4rem 2rem 3rem;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffcece' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffcece' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
     }
-
     .hero-emoji {
       font-size: 5rem;
-      animation: bounce 1.5s infinite;
+      animation: bounce 1.6s infinite;
       display: block;
       margin-bottom: 1rem;
     }
-
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-15px); }
+      50%       { transform: translateY(-16px); }
     }
-
     .hero h1 {
       font-size: 3rem;
       font-weight: 900;
@@ -82,130 +77,188 @@
       line-height: 1.2;
       margin-bottom: 1rem;
     }
-
     .hero p {
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       color: #555;
       max-width: 500px;
       margin: 0 auto 2rem;
     }
-
     .btn {
       display: inline-block;
       background: #ff6b6b;
       color: white;
       font-family: 'Nunito', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 900;
       padding: 0.85rem 2.5rem;
       border-radius: 50px;
       text-decoration: none;
       box-shadow: 0 6px 0 #c0392b;
       transition: transform 0.1s, box-shadow 0.1s;
-      border: none;
+    }
+    .btn:hover { transform: translateY(3px); box-shadow: 0 3px 0 #c0392b; }
+
+    /* ── Section headings ── */
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #e63946;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Videos section ── */
+    .videos-section {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+      transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
     }
-
-    .btn:hover {
-      transform: translateY(3px);
-      box-shadow: 0 3px 0 #c0392b;
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
     }
 
-    /* Features */
-    .features {
+    /* Thumbnail wrapper — 16:9 */
+    .thumb-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #111;
+      overflow: hidden;
+    }
+    .thumb-wrap img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .video-card:hover .thumb-wrap img { transform: scale(1.04); }
+
+    .play-overlay {
+      position: absolute;
+      inset: 0;
       display: flex;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      background: rgba(0,0,0,0.15);
+      transition: background 0.2s;
+    }
+    .video-card:hover .play-overlay { background: rgba(0,0,0,0.3); }
+    .play-circle {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+    }
+    .video-card:hover .play-circle { transform: scale(1.1); }
+
+    .video-info {
+      padding: 0.9rem 1rem 1rem;
+    }
+    .video-info h3 {
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #222;
+      line-height: 1.3;
+    }
+    .video-info .tag {
+      display: inline-block;
+      margin-top: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.6rem;
+      border-radius: 20px;
+      color: white;
+    }
+
+    /* ── Shorts section ── */
+    .shorts-section {
+      background: linear-gradient(180deg, #fff0f5 0%, #fff9f0 100%);
       padding: 3rem 2rem;
+    }
+    .shorts-inner {
       max-width: 1000px;
       margin: 0 auto;
     }
 
-    .card {
-      background: white;
-      border-radius: 20px;
-      padding: 2rem 1.5rem;
-      text-align: center;
-      width: 200px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-      transition: transform 0.2s;
-      border-top: 5px solid;
+    .shorts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
     }
 
-    .card:hover { transform: translateY(-6px); }
-    .card:nth-child(1) { border-color: #ff6b6b; }
-    .card:nth-child(2) { border-color: #feca57; }
-    .card:nth-child(3) { border-color: #48dbfb; }
-    .card:nth-child(4) { border-color: #ff9ff3; }
-
-    .card .icon { font-size: 3rem; margin-bottom: 0.75rem; }
-    .card h3 { font-size: 1.1rem; font-weight: 900; color: #333; margin-bottom: 0.4rem; }
-    .card p  { font-size: 0.9rem; color: #777; }
-
-    /* Song strip */
-    .songs-section {
-      background: linear-gradient(180deg, #fff9f0 0%, #fff0f5 100%);
-      padding: 2rem 2rem 3rem;
-      text-align: center;
-    }
-
-    .songs-section h2 {
-      font-size: 2rem;
-      font-weight: 900;
-      color: #e63946;
-      margin-bottom: 1.5rem;
-    }
-
-    .songs {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .song-card {
+    .short-card {
       background: white;
       border-radius: 16px;
-      padding: 1.25rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.07);
-      width: 260px;
-      transition: transform 0.2s;
-    }
-
-    .song-card:hover { transform: scale(1.03); }
-
-    .play-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      flex-shrink: 0;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+      transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
-      border: none;
-      transition: transform 0.1s;
     }
-    .play-btn:hover { transform: scale(1.1); }
+    .short-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+    }
 
-    .song-card:nth-child(1) .play-btn { background: #ff6b6b; }
-    .song-card:nth-child(2) .play-btn { background: #feca57; }
-    .song-card:nth-child(3) .play-btn { background: #48dbfb; }
-    .song-card:nth-child(4) .play-btn { background: #ff9ff3; }
-    .song-card:nth-child(5) .play-btn { background: #1dd1a1; }
-    .song-card:nth-child(6) .play-btn { background: #54a0ff; }
+    /* 9:16 portrait */
+    .short-thumb {
+      position: relative;
+      width: 100%;
+      padding-top: 177.78%;
+      background: #111;
+      overflow: hidden;
+    }
+    .short-thumb img {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .short-card:hover .short-thumb img { transform: scale(1.04); }
+    .short-thumb .play-overlay { background: rgba(0,0,0,0.2); }
+    .short-card:hover .short-thumb .play-overlay { background: rgba(0,0,0,0.35); }
 
-    .song-info h4 { font-size: 0.95rem; font-weight: 900; color: #333; }
-    .song-info p  { font-size: 0.8rem; color: #aaa; }
+    .short-info {
+      padding: 0.75rem 0.9rem 0.9rem;
+    }
+    .short-info h3 {
+      font-size: 0.88rem;
+      font-weight: 900;
+      color: #222;
+      line-height: 1.3;
+    }
+    .shorts-badge {
+      display: inline-block;
+      background: #ff0000;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 900;
+      padding: 0.1rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.35rem;
+    }
 
-    /* Footer */
+    /* ── Footer ── */
     footer {
       background: #333;
       color: #ccc;
@@ -214,17 +267,59 @@
       font-size: 0.9rem;
     }
     footer span { color: #ff6b6b; }
+    footer a { color: #48dbfb; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Modal ── */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-bg.open { display: flex; }
+    .modal-box {
+      position: relative;
+      width: 100%;
+      max-width: 860px;
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .modal-box.short-modal { max-width: 400px; }
+    .modal-ratio { position: relative; width: 100%; padding-top: 56.25%; }
+    .modal-box.short-modal .modal-ratio { padding-top: 177.78%; }
+    .modal-ratio iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo"><span>🎵</span> Kikkumalti</div>
+    <a class="logo" href="#">🎵 Kikkumalti</a>
     <nav>
-      <a href="#">Songs</a>
-      <a href="#">Games</a>
-      <a href="#">Videos</a>
-      <a href="#">Parents</a>
+      <a href="#videos">Videos</a>
+      <a href="#shorts">Shorts</a>
+      <a href="https://www.youtube.com/@KikkuMalti" target="_blank">YouTube</a>
     </nav>
   </header>
 
@@ -232,83 +327,137 @@
     <span class="hero-emoji">🎶</span>
     <h1>Music That Makes<br>Kids Dance!</h1>
     <p>Fun songs, catchy beats and sing-alongs made just for little ones.</p>
-    <a href="#" class="btn">Start Listening 🎧</a>
+    <a href="#videos" class="btn">Watch Our Videos 🎬</a>
   </section>
 
-  <section class="features">
-    <div class="card">
-      <div class="icon">🎵</div>
-      <h3>Fun Songs</h3>
-      <p>Catchy tunes kids love to sing</p>
-    </div>
-    <div class="card">
-      <div class="icon">🥁</div>
-      <h3>Beats &amp; Rhythm</h3>
-      <p>Learn rhythm while having fun</p>
-    </div>
-    <div class="card">
-      <div class="icon">🎤</div>
-      <h3>Sing Along</h3>
-      <p>Lyrics on screen for easy singing</p>
-    </div>
-    <div class="card">
-      <div class="icon">🌈</div>
-      <h3>Kid Safe</h3>
-      <p>100% safe content for all ages</p>
-    </div>
+  <!-- ── Full Videos ── -->
+  <section class="videos-section" id="videos">
+    <h2 class="section-title">🎬 Our Videos</h2>
+    <div class="video-grid" id="videoGrid"></div>
   </section>
 
-  <section class="songs-section">
-    <h2>🎵 Popular Songs</h2>
-    <div class="songs">
-      <div class="song-card">
-        <button class="play-btn">▶️</button>
-        <div class="song-info">
-          <h4>Happy Morning Song</h4>
-          <p>2:34 · Wake-up tunes</p>
-        </div>
-      </div>
-      <div class="song-card">
-        <button class="play-btn">▶️</button>
-        <div class="song-info">
-          <h4>Dance with the Animals</h4>
-          <p>3:10 · Dance & Move</p>
-        </div>
-      </div>
-      <div class="song-card">
-        <button class="play-btn">▶️</button>
-        <div class="song-info">
-          <h4>Colors of the Rainbow</h4>
-          <p>2:50 · Learning Songs</p>
-        </div>
-      </div>
-      <div class="song-card">
-        <button class="play-btn">▶️</button>
-        <div class="song-info">
-          <h4>Bedtime Lullaby</h4>
-          <p>4:00 · Calm & Sleep</p>
-        </div>
-      </div>
-      <div class="song-card">
-        <button class="play-btn">▶️</button>
-        <div class="song-info">
-          <h4>Counting 1 to 10</h4>
-          <p>2:20 · Learning Songs</p>
-        </div>
-      </div>
-      <div class="song-card">
-        <button class="play-btn">▶️</button>
-        <div class="song-info">
-          <h4>Jungle Boogie</h4>
-          <p>3:05 · Dance & Move</p>
-        </div>
-      </div>
+  <!-- ── Shorts ── -->
+  <section class="shorts-section" id="shorts">
+    <div class="shorts-inner">
+      <h2 class="section-title">⚡ Shorts</h2>
+      <div class="shorts-grid" id="shortsGrid"></div>
     </div>
   </section>
 
   <footer>
-    <p>Made with <span>♥</span> for little music lovers · Kikkumalti &copy; 2026</p>
+    <p>Made with <span>♥</span> for little music lovers &nbsp;·&nbsp;
+      <a href="https://www.youtube.com/@KikkuMalti" target="_blank">Subscribe on YouTube</a>
+      &nbsp;·&nbsp; Kikkumalti &copy; 2026
+    </p>
   </footer>
+
+  <!-- ── Modal player ── -->
+  <div class="modal-bg" id="modalBg">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-ratio">
+        <iframe id="modalFrame" allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const COLORS = ['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#1dd1a1','#54a0ff'];
+
+    const VIDEOS = [
+      { id: 'I3iTBRqU77c' },
+      { id: 'o2M5pITcMhs' },
+      { id: 'HFJP__4gaPQ' },
+      { id: 'dRjuuaMASJU' },
+      { id: 'avr4isLBsq4' },
+      { id: 'ZtlPid3VbGU' },
+    ];
+
+    const SHORTS = [
+      { id: 'F3HvaOjcAwI' },
+      { id: 'x5jnFfWUzcI' },
+      { id: 'F94L3NmSD3M' },
+    ];
+
+    function thumb(id) {
+      return `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    }
+
+    function playOverlay() {
+      return `<div class="play-overlay"><div class="play-circle">▶</div></div>`;
+    }
+
+    // Fetch title via oEmbed (runs in browser, no CORS issue)
+    async function fetchTitle(id, el) {
+      try {
+        const r = await fetch(`https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`);
+        const d = await r.json();
+        el.textContent = d.title;
+      } catch(_) {}
+    }
+
+    // Build video grid
+    const vGrid = document.getElementById('videoGrid');
+    VIDEOS.forEach((v, i) => {
+      const color = COLORS[i % COLORS.length];
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      card.innerHTML = `
+        <div class="thumb-wrap">
+          <img src="${thumb(v.id)}" alt="video thumbnail" loading="lazy">
+          ${playOverlay()}
+        </div>
+        <div class="video-info">
+          <h3 class="vtitle">Loading…</h3>
+          <span class="tag" style="background:${color}">🎵 Song</span>
+        </div>`;
+      card.addEventListener('click', () => openModal(v.id, false));
+      vGrid.appendChild(card);
+      fetchTitle(v.id, card.querySelector('.vtitle'));
+    });
+
+    // Build shorts grid
+    const sGrid = document.getElementById('shortsGrid');
+    SHORTS.forEach((v, i) => {
+      const card = document.createElement('div');
+      card.className = 'short-card';
+      card.innerHTML = `
+        <div class="short-thumb">
+          <img src="${thumb(v.id)}" alt="short thumbnail" loading="lazy">
+          ${playOverlay()}
+        </div>
+        <div class="short-info">
+          <h3 class="vtitle">Loading…</h3>
+          <span class="shorts-badge">Shorts</span>
+        </div>`;
+      card.addEventListener('click', () => openModal(v.id, true));
+      sGrid.appendChild(card);
+      fetchTitle(v.id, card.querySelector('.vtitle'));
+    });
+
+    // Modal
+    const modalBg    = document.getElementById('modalBg');
+    const modalBox   = document.getElementById('modalBox');
+    const modalFrame = document.getElementById('modalFrame');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(id, isShort) {
+      modalFrame.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      modalBox.classList.toggle('short-modal', isShort);
+      modalBg.classList.add('open');
+    }
+
+    function closeModal() {
+      modalBg.classList.remove('open');
+      modalFrame.src = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
 
 </body>
 </html>
