@@ -47,11 +47,18 @@
       100% { background-position: 0% 50%; }
     }
     .logo {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: white;
-      text-shadow: 3px 3px 0 rgba(0,0,0,0.15);
+      display: block;
+      width: 190px;
+      padding: 0.3rem 0.65rem;
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
       text-decoration: none;
+    }
+    .logo img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
     nav a {
       color: white;
@@ -64,6 +71,12 @@
       display: inline-block;
     }
     nav a:hover { transform: scale(1.1); }
+
+    @media (max-width: 640px) {
+      header { padding: 0.75rem; }
+      .logo { width: 145px; padding: 0.25rem 0.5rem; border-radius: 10px; }
+      nav a { margin-left: 0.55rem; font-size: 0.8rem; }
+    }
 
     /* ── Hero ── */
     .hero {
@@ -326,7 +339,9 @@
 <body>
 
   <header>
-    <a class="logo" href="#">🎵 Kikkumalti</a>
+    <a class="logo" href="#" aria-label="Kikku home">
+      <img src="assets/kikku-logo.png" alt="Kikku">
+    </a>
     <nav>
       <a href="#videos">Vidjows</a>
       <a href="#shorts">Shorts</a>
