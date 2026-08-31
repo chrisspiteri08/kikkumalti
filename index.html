@@ -20,10 +20,21 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --ink: #29283a;
+      --muted: #6f6d7d;
+      --accent: #e94ca1;
+      --accent-dark: #b72a7a;
+      --accent-soft: #fce9f5;
+      --surface: #ffffff;
+      --page: #f7f7fa;
+      --line: #e9e8ef;
+    }
+
     body {
       font-family: 'Nunito', sans-serif;
-      background: #fff9f0;
-      color: #333;
+      background: var(--page);
+      color: var(--ink);
       overflow-x: hidden;
     }
 
@@ -34,17 +45,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+      border-bottom: 1px solid var(--line);
       position: sticky;
       top: 0;
       z-index: 100;
     }
     .logo {
       display: block;
-      width: 190px;
-      padding: 0.3rem 0.65rem;
-      background: white;
-      border-radius: 14px;
+      width: 180px;
       text-decoration: none;
     }
     .logo img {
@@ -53,19 +61,19 @@
       height: auto;
     }
     nav a {
-      color: #e6398f;
+      color: var(--ink);
       text-decoration: none;
       font-weight: 700;
       font-size: 1rem;
       margin-left: 1.5rem;
-      transition: transform 0.2s;
+      transition: color 0.2s;
       display: inline-block;
     }
-    nav a:hover { transform: scale(1.1); }
+    nav a:hover { color: var(--accent-dark); }
 
     @media (max-width: 640px) {
       header { padding: 0.75rem; }
-      .logo { width: 145px; padding: 0.25rem 0.5rem; border-radius: 10px; }
+      .logo { width: 140px; }
       nav a { margin-left: 0.55rem; font-size: 0.8rem; }
     }
 
@@ -118,13 +126,22 @@
       text-align: center;
       font-size: 2rem;
       font-weight: 900;
-      color: #e63946;
-      margin-bottom: 2rem;
+      color: var(--ink);
+      margin-bottom: 2.25rem;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 52px;
+      height: 4px;
+      margin: 0.6rem auto 0;
+      background: var(--accent);
+      border-radius: 999px;
     }
 
     /* ── Videos section ── */
     .videos-section {
-      padding: 3rem 2rem;
+      padding: 4rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -136,16 +153,17 @@
     }
 
     .video-card {
-      background: white;
-      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+      box-shadow: 0 4px 14px rgba(41,40,58,0.05);
       transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
     }
     .video-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+      box-shadow: 0 12px 30px rgba(41,40,58,0.1);
     }
 
     /* Thumbnail wrapper — 16:9 */
@@ -177,11 +195,12 @@
     .video-card:hover .play-overlay { background: rgba(0,0,0,0.3); }
     .play-circle {
       width: 56px; height: 56px;
-      background: rgba(255,255,255,0.92);
+      background: var(--accent);
+      color: white;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.5rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 16px rgba(183,42,122,0.3);
       transition: transform 0.2s;
     }
     .video-card:hover .play-circle { transform: scale(1.1); }
@@ -192,7 +211,7 @@
     .video-info h3 {
       font-size: 0.95rem;
       font-weight: 900;
-      color: #222;
+      color: var(--ink);
       line-height: 1.3;
     }
     .video-info .tag {
@@ -202,13 +221,14 @@
       font-weight: 700;
       padding: 0.15rem 0.6rem;
       border-radius: 20px;
-      color: white;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
     }
 
     /* ── Shorts section ── */
     .shorts-section {
-      background: linear-gradient(180deg, #fff0f5 0%, #fff9f0 100%);
-      padding: 3rem 2rem;
+      background: #f0f1f5;
+      padding: 4rem 2rem;
     }
     .shorts-inner {
       max-width: 1000px;
@@ -222,16 +242,17 @@
     }
 
     .short-card {
-      background: white;
-      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.09);
+      box-shadow: 0 4px 14px rgba(41,40,58,0.05);
       transition: transform 0.2s, box-shadow 0.2s;
       cursor: pointer;
     }
     .short-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+      box-shadow: 0 12px 30px rgba(41,40,58,0.1);
     }
 
     /* 9:16 portrait */
@@ -259,30 +280,30 @@
     .short-info h3 {
       font-size: 0.88rem;
       font-weight: 900;
-      color: #222;
+      color: var(--ink);
       line-height: 1.3;
     }
     .shorts-badge {
       display: inline-block;
-      background: #ff0000;
-      color: white;
+      background: var(--accent-soft);
+      color: var(--accent-dark);
       font-size: 0.7rem;
       font-weight: 900;
       padding: 0.1rem 0.5rem;
-      border-radius: 4px;
+      border-radius: 20px;
       margin-top: 0.35rem;
     }
 
     /* ── Footer ── */
     footer {
-      background: #333;
-      color: #ccc;
+      background: var(--ink);
+      color: #d8d7df;
       text-align: center;
       padding: 1.5rem;
       font-size: 0.9rem;
     }
-    footer span { color: #ff6b6b; }
-    footer a { color: #48dbfb; text-decoration: none; }
+    footer span { color: var(--accent); }
+    footer a { color: #f3a9d4; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
     /* ── Modal ── */
@@ -324,6 +345,12 @@
       font-size: 2rem;
       cursor: pointer;
       line-height: 1;
+    }
+
+    @media (max-width: 640px) {
+      .videos-section, .shorts-section { padding: 3rem 1rem; }
+      .video-grid { grid-template-columns: 1fr; }
+      .shorts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -374,8 +401,6 @@
   </div>
 
   <script>
-    const COLORS = ['#ff6b6b','#feca57','#48dbfb','#ff9ff3','#1dd1a1','#54a0ff'];
-
     const VIDEOS = [
       { id: 'ZtlPid3VbGU' },
       { id: 'o2M5pITcMhs' },
@@ -409,8 +434,7 @@
 
     // Build video grid
     const vGrid = document.getElementById('videoGrid');
-    VIDEOS.forEach((v, i) => {
-      const color = COLORS[i % COLORS.length];
+    VIDEOS.forEach(v => {
       const card = document.createElement('div');
       card.className = 'video-card';
       card.innerHTML = `
@@ -420,7 +444,7 @@
         </div>
         <div class="video-info">
           <h3 class="vtitle">Qed jillowdja…</h3>
-          <span class="tag" style="background:${color}">🎵 Kanzunetta</span>
+          <span class="tag">🎵 Kanzunetta</span>
         </div>`;
       card.addEventListener('click', () => openModal(v.id, false));
       vGrid.appendChild(card);
