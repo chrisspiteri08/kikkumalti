@@ -531,20 +531,20 @@
         <h3 id="signup-title">Irċevih bl-email</h3>
         <p>Il-formola se tkun għall-adulti biss. Qatt mhu se nitolbu email ta' tifel jew tifla.</p>
         <form>
-          <fieldset disabled>
+          <fieldset>
             <label for="audience">Int min int?</label>
             <select id="audience" name="audience">
-              <option>Ġenitur jew persuna li tieħu ħsieb it-tfal</option>
-              <option>Edukatur jew skola</option>
+              <option value="parent">Ġenitur jew persuna li tieħu ħsieb it-tfal</option>
+              <option value="educator">Edukatur jew skola</option>
             </select>
 
             <label for="signup-email">L-email tiegħek</label>
-            <input id="signup-email" name="email" type="email" placeholder="isem@example.com">
+            <input id="signup-email" name="email" type="email" placeholder="isem@example.com" disabled>
 
-            <label for="age-range">Età tat-tfal jew tal-klassi (mhux obbligatorju)</label>
-            <input id="age-range" name="age-range" type="text" placeholder="eż. 3–5 snin">
+            <label id="age-range-label" for="age-range">Età tat-tfal tiegħek (mhux obbligatorju)</label>
+            <input id="age-range" name="age-range" type="text" placeholder="eż. 2 u 5 snin" disabled>
 
-            <button type="submit">Abbona u niżżel</button>
+            <button type="submit" disabled>Abbona u niżżel</button>
           </fieldset>
         </form>
         <p class="form-note">Il-pakkett u s-servizz tal-email għadhom qed jiġu ppreparati. Il-formola tinfetaħ meta jkunu lesti.</p>
@@ -676,6 +676,18 @@
     modalClose.addEventListener('click', closeModal);
     modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    const audienceSelect = document.getElementById('audience');
+    const ageRangeLabel = document.getElementById('age-range-label');
+    const ageRangeInput = document.getElementById('age-range');
+
+    audienceSelect.addEventListener('change', () => {
+      const isEducator = audienceSelect.value === 'educator';
+      ageRangeLabel.textContent = isEducator
+        ? "Età tat-tfal fil-klassi tiegħek (mhux obbligatorju)"
+        : "Età tat-tfal tiegħek (mhux obbligatorju)";
+      ageRangeInput.placeholder = isEducator ? 'eż. 3–5 snin' : 'eż. 2 u 5 snin';
+    });
   </script>
 
 </body>
