@@ -156,6 +156,77 @@
     .pathway-link:hover { text-decoration: underline; }
     .pathway-status { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
 
+    /* ── Free activity pack ── */
+    .free-pack-section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+    .free-pack-panel {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      padding: 2.5rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+    }
+    .pack-kicker {
+      display: inline-block;
+      margin-bottom: 0.75rem;
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .pack-copy h2 {
+      max-width: 560px;
+      margin-bottom: 1rem;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      line-height: 1.1;
+    }
+    .pack-copy > p { color: var(--muted); line-height: 1.65; }
+    .pack-list {
+      display: grid;
+      gap: 0.65rem;
+      margin-top: 1.4rem;
+      list-style: none;
+    }
+    .pack-list li::before { content: '✓'; margin-right: 0.65rem; color: var(--accent-dark); font-weight: 900; }
+    .signup-preview {
+      padding: 1.5rem;
+      background: var(--page);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    .signup-preview h3 { margin-bottom: 0.35rem; font-size: 1.2rem; }
+    .signup-preview > p { margin-bottom: 1.2rem; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+    .signup-preview fieldset { min-width: 0; border: 0; }
+    .signup-preview label { display: block; margin: 0.85rem 0 0.35rem; font-size: 0.82rem; font-weight: 900; }
+    .signup-preview input, .signup-preview select {
+      width: 100%;
+      padding: 0.8rem 0.9rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      font: inherit;
+      opacity: 1;
+    }
+    .signup-preview button {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      color: #fff;
+      background: var(--accent);
+      border: 0;
+      border-radius: 10px;
+      font: 900 0.95rem 'Nunito', sans-serif;
+      opacity: 0.55;
+    }
+    .form-note { margin-top: 0.9rem; color: var(--muted); font-size: 0.75rem; line-height: 1.45; }
+
     /* ── Section headings ── */
     .section-title {
       text-align: center;
@@ -388,6 +459,8 @@
       .pathways { padding: 0 1rem 1rem; }
       .pathway-grid { grid-template-columns: 1fr; }
       .pathway-card { min-height: 0; }
+      .free-pack-section { padding: 2rem 1rem 3rem; }
+      .free-pack-panel { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.35rem; }
       .videos-section, .shorts-section { padding: 3rem 1rem; }
       .video-grid { grid-template-columns: 1fr; }
       .shorts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -429,7 +502,7 @@
         <span class="pathway-icon" aria-hidden="true">✎</span>
         <h2>Niżżel attivitajiet b'xejn</h2>
         <p>Paġni ta' kulur, logħob u tagħlim biex tkompli l-esperjenza wara l-kanzunetta.</p>
-        <span class="pathway-status">Dalwaqt</span>
+        <a class="pathway-link" href="#pakkett">Ara l-pakkett →</a>
       </article>
 
       <article class="pathway-card" id="edukaturi">
@@ -438,6 +511,44 @@
         <p>Riżorsi bil-Malti, pakketti skont it-tema u opportunitajiet għall-iskejjel.</p>
         <span class="pathway-status">Qed nippreparaw din is-sezzjoni</span>
       </article>
+    </div>
+  </section>
+
+  <section class="free-pack-section" id="pakkett" aria-labelledby="pack-title">
+    <div class="free-pack-panel">
+      <div class="pack-copy">
+        <span class="pack-kicker">Rigali b'xejn mingħand Kikku</span>
+        <h2 id="pack-title">Il-Pakkett ta' Kikku b'xejn</h2>
+        <p>Għaxar paġni ta' logħob, kulur u tagħlim bil-Malti biex tgawdu flimkien id-dar jew fil-klassi.</p>
+        <ul class="pack-list">
+          <li>Attivitajiet sempliċi u divertenti</li>
+          <li>Magħmul għall-ġenituri u l-edukaturi</li>
+          <li>Jasal direttament fl-email tiegħek</li>
+        </ul>
+      </div>
+
+      <div class="signup-preview" aria-labelledby="signup-title">
+        <h3 id="signup-title">Irċevih bl-email</h3>
+        <p>Il-formola se tkun għall-adulti biss. Qatt mhu se nitolbu email ta' tifel jew tifla.</p>
+        <form>
+          <fieldset disabled>
+            <label for="audience">Int min int?</label>
+            <select id="audience" name="audience">
+              <option>Ġenitur jew persuna li tieħu ħsieb it-tfal</option>
+              <option>Edukatur jew skola</option>
+            </select>
+
+            <label for="signup-email">L-email tiegħek</label>
+            <input id="signup-email" name="email" type="email" placeholder="isem@example.com">
+
+            <label for="age-range">Età tat-tfal jew tal-klassi (mhux obbligatorju)</label>
+            <input id="age-range" name="age-range" type="text" placeholder="eż. 3–5 snin">
+
+            <button type="submit">Abbona u niżżel</button>
+          </fieldset>
+        </form>
+        <p class="form-note">Il-pakkett u s-servizz tal-email għadhom qed jiġu ppreparati. Il-formola tinfetaħ meta jkunu lesti.</p>
+      </div>
     </div>
   </section>
 
