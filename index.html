@@ -83,13 +83,17 @@
 
     /* ── Homepage introduction ── */
     .hero {
-      text-align: center;
-      padding: 5.5rem 2rem 6.5rem;
-      background: radial-gradient(circle at top, #1a2b52 0%, var(--page) 62%);
+      padding: 5rem 2rem 7rem;
+      background-color: var(--page);
+      background-image: repeating-linear-gradient(115deg, transparent 0 52px, rgba(255,255,255,0.025) 52px 53px);
     }
     .hero-inner {
-      max-width: 860px;
+      max-width: 1120px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      align-items: center;
+      gap: 4rem;
     }
     .eyebrow {
       display: inline-block;
@@ -110,48 +114,107 @@
     .hero p {
       font-size: 1.15rem;
       color: var(--muted);
-      max-width: 650px;
-      margin: 0 auto;
+      max-width: 600px;
       line-height: 1.7;
     }
+    .record-stage {
+      min-height: 340px;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+    .record-disc {
+      width: min(310px, 30vw);
+      aspect-ratio: 1;
+      border: 8px solid #24375f;
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle, #f05bad 0 36px, #f6a5d3 37px 43px, #101d38 44px 72px, #263b66 73px 76px);
+      box-shadow: 24px 28px 0 #172544, 0 30px 60px rgba(0,0,0,0.35);
+      display: grid;
+      place-items: center;
+      transform: rotate(-7deg);
+    }
+    .record-disc::after {
+      content: '♪';
+      display: grid;
+      place-items: center;
+      width: 74px;
+      aspect-ratio: 1;
+      color: #172544;
+      background: #fff;
+      border-radius: 50%;
+      font-size: 2.2rem;
+      font-weight: 900;
+      box-shadow: 0 0 0 8px rgba(255,255,255,0.25);
+    }
+    .sound-chip {
+      position: absolute;
+      padding: 0.5rem 0.75rem;
+      color: #172544;
+      background: #fff;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      box-shadow: 5px 6px 0 var(--accent);
+      transform: rotate(var(--turn));
+    }
+    .chip-one { top: 22px; right: 5px; --turn: 5deg; }
+    .chip-two { bottom: 25px; left: 0; --turn: -6deg; }
+    .chip-three { bottom: 5px; right: 20px; --turn: 3deg; }
 
     .pathways {
       max-width: 1120px;
-      margin: -2.5rem auto 0;
-      padding: 0 2rem 2rem;
+      margin: -3.5rem auto 0;
+      padding: 1.25rem 2rem 2rem;
       position: relative;
       z-index: 2;
     }
-    .pathway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-    .pathway-card {
-      min-height: 230px;
-      padding: 1.65rem;
+    .pathways-shell {
+      padding: 1rem 1.5rem 0;
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: 0 14px 35px rgba(0,0,0,0.18);
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      border-radius: 28px;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.22);
     }
-    .pathway-icon {
+    .pathways-heading { padding: 0.8rem 0.4rem 1.1rem; border-bottom: 1px solid var(--line); }
+    .pathways-heading span { color: var(--accent-dark); font-size: 0.72rem; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+    .pathways-heading h2 { margin-top: 0.2rem; font-size: 1.65rem; }
+    .pathway-grid { display: block; }
+    .pathway-card {
+      min-height: 0;
+      padding: 1.35rem 0.4rem;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      border-radius: 0;
+      box-shadow: none;
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+    .pathway-card:last-child { border-bottom: 0; }
+    .pathway-number {
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 1rem;
-      border-radius: 12px;
+      width: 52px;
+      aspect-ratio: 1;
+      border-radius: 50%;
       background: var(--accent-soft);
-      font-size: 1.25rem;
+      color: var(--accent-dark);
+      font-size: 0.82rem;
+      font-weight: 900;
+      letter-spacing: 0.06em;
     }
     .pathway-card h2 { margin-bottom: 0.55rem; font-size: 1.2rem; color: var(--ink); }
     .pathway-card p { color: var(--muted); line-height: 1.55; font-size: 0.92rem; }
     .pathway-link, .pathway-status {
-      margin-top: auto;
-      padding-top: 1.25rem;
+      margin: 0;
+      padding: 0 0.5rem;
       color: var(--accent-dark);
       font-weight: 900;
       text-decoration: none;
+      white-space: nowrap;
     }
     .pathway-link:hover { text-decoration: underline; }
     .pathway-status { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -455,10 +518,16 @@
 
     @media (max-width: 640px) {
       .hero { padding: 4rem 1rem 5.5rem; }
+      .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
       .hero p { font-size: 1rem; }
+      .record-stage { min-height: 270px; }
+      .record-disc { width: 220px; }
+      .sound-chip { font-size: 0.7rem; }
       .pathways { padding: 0 1rem 1rem; }
-      .pathway-grid { grid-template-columns: 1fr; }
-      .pathway-card { min-height: 0; }
+      .pathways-shell { padding: 0.75rem 1rem 0; }
+      .pathway-card { grid-template-columns: 52px 1fr; gap: 0.7rem; }
+      .pathway-number { width: 42px; }
+      .pathway-link, .pathway-status { grid-column: 2; padding: 0 0 0.4rem; white-space: normal; }
       .free-pack-section { padding: 2rem 1rem 3rem; }
       .free-pack-panel { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.35rem; }
       .videos-section, .shorts-section { padding: 3rem 1rem; }
@@ -483,34 +552,45 @@
   <main>
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-inner">
-      <span class="eyebrow">Merħba fid-dinja ta' Kikku</span>
-      <h1 id="hero-title">Kanzunetti, stejjer u attivitajiet bil-Malti għat-tfal.</h1>
-      <p>Kontenut divertenti u riżorsi utli għall-ġenituri, dawk li jieħdu ħsieb it-tfal, u l-edukaturi.</p>
+      <div class="hero-copy">
+        <span class="eyebrow">Merħba fid-dinja ta' Kikku</span>
+        <h1 id="hero-title">Kanzunetti, stejjer u attivitajiet bil-Malti għat-tfal.</h1>
+        <p>Kontenut divertenti u riżorsi utli għall-ġenituri, dawk li jieħdu ħsieb it-tfal, u l-edukaturi.</p>
+      </div>
+      <div class="record-stage" aria-hidden="true">
+        <div class="record-disc"></div>
+        <span class="sound-chip chip-one">Kanta</span>
+        <span class="sound-chip chip-two">Ilgħab</span>
+        <span class="sound-chip chip-three">Tgħallem</span>
+      </div>
     </div>
   </section>
 
   <section class="pathways" aria-label="Agħżel minn fejn trid tibda">
-    <div class="pathway-grid">
+    <div class="pathways-shell">
+      <div class="pathways-heading">
+        <span>Il-programm ta' Kikku</span>
+        <h2>Fejn trid tibda?</h2>
+      </div>
+      <div class="pathway-grid">
       <article class="pathway-card">
-        <span class="pathway-icon" aria-hidden="true">▶</span>
-        <h2>Ara l-kanzunetti</h2>
-        <p>Isma', kanta u ċċaqlaq ma' Kikku bil-kanzunetti tat-tfal bil-Malti.</p>
+        <span class="pathway-number" aria-hidden="true">01</span>
+        <div><h2>Ara l-kanzunetti</h2><p>Isma', kanta u ċċaqlaq ma' Kikku bil-kanzunetti tat-tfal bil-Malti.</p></div>
         <a class="pathway-link" href="#videos">Ara l-kanzunetti →</a>
       </article>
 
       <article class="pathway-card" id="attivitajiet">
-        <span class="pathway-icon" aria-hidden="true">✎</span>
-        <h2>Niżżel attivitajiet b'xejn</h2>
-        <p>Paġni ta' kulur, logħob u tagħlim biex tkompli l-esperjenza wara l-kanzunetta.</p>
+        <span class="pathway-number" aria-hidden="true">02</span>
+        <div><h2>Niżżel attivitajiet b'xejn</h2><p>Paġni ta' kulur, logħob u tagħlim biex tkompli l-esperjenza wara l-kanzunetta.</p></div>
         <a class="pathway-link" href="#pakkett">Ara l-pakkett →</a>
       </article>
 
       <article class="pathway-card" id="edukaturi">
-        <span class="pathway-icon" aria-hidden="true">★</span>
-        <h2>Għall-edukaturi u l-iskejjel</h2>
-        <p>Riżorsi bil-Malti, pakketti skont it-tema u opportunitajiet għall-iskejjel.</p>
+        <span class="pathway-number" aria-hidden="true">03</span>
+        <div><h2>Għall-edukaturi u l-iskejjel</h2><p>Riżorsi bil-Malti, pakketti skont it-tema u opportunitajiet għall-iskejjel.</p></div>
         <span class="pathway-status">Qed nippreparaw din is-sezzjoni</span>
       </article>
+      </div>
     </div>
   </section>
 
