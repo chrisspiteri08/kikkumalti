@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="mt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kikkumalti - Mużika għat-Tfal!</title>
+  <meta name="description" content="Kanzunetti, stejjer u attivitajiet bil-Malti għat-tfal, għall-ġenituri u għall-edukaturi.">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LRBWYZP03E"></script>
@@ -74,54 +75,86 @@
     nav a:hover { color: var(--accent-dark); }
 
     @media (max-width: 640px) {
-      header { padding: 0.75rem; }
+      header { padding: 0.75rem; flex-direction: column; gap: 0.6rem; }
       .logo { width: 140px; }
-      nav a { margin-left: 0.55rem; font-size: 0.8rem; }
+      nav { display: flex; justify-content: center; gap: 1rem; width: 100%; }
+      nav a { margin-left: 0; font-size: 0.8rem; }
     }
 
-    /* ── Hero ── */
+    /* ── Homepage introduction ── */
     .hero {
       text-align: center;
-      padding: 4rem 2rem 3rem;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffcece' fill-opacity='0.3'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
+      padding: 5.5rem 2rem 6.5rem;
+      background: radial-gradient(circle at top, #1a2b52 0%, var(--page) 62%);
     }
-    .hero-emoji {
-      font-size: 5rem;
-      animation: bounce 1.6s infinite;
-      display: block;
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-block;
       margin-bottom: 1rem;
-    }
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(-16px); }
+      color: var(--accent-dark);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
     .hero h1 {
-      font-size: 3rem;
+      font-size: clamp(2.35rem, 6vw, 4.6rem);
       font-weight: 900;
-      color: #e63946;
-      line-height: 1.2;
-      margin-bottom: 1rem;
+      color: var(--ink);
+      line-height: 1.05;
+      margin-bottom: 1.4rem;
     }
     .hero p {
-      font-size: 1.25rem;
-      color: #555;
-      max-width: 500px;
-      margin: 0 auto 2rem;
-    }
-    .btn {
-      display: inline-block;
-      background: #ff6b6b;
-      color: white;
-      font-family: 'Nunito', sans-serif;
       font-size: 1.15rem;
-      font-weight: 900;
-      padding: 0.85rem 2.5rem;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 6px 0 #c0392b;
-      transition: transform 0.1s, box-shadow 0.1s;
+      color: var(--muted);
+      max-width: 650px;
+      margin: 0 auto;
+      line-height: 1.7;
     }
-    .btn:hover { transform: translateY(3px); box-shadow: 0 3px 0 #c0392b; }
+
+    .pathways {
+      max-width: 1120px;
+      margin: -2.5rem auto 0;
+      padding: 0 2rem 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .pathway-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .pathway-card {
+      min-height: 230px;
+      padding: 1.65rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.18);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .pathway-icon {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 1rem;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      font-size: 1.25rem;
+    }
+    .pathway-card h2 { margin-bottom: 0.55rem; font-size: 1.2rem; color: var(--ink); }
+    .pathway-card p { color: var(--muted); line-height: 1.55; font-size: 0.92rem; }
+    .pathway-link, .pathway-status {
+      margin-top: auto;
+      padding-top: 1.25rem;
+      color: var(--accent-dark);
+      font-weight: 900;
+      text-decoration: none;
+    }
+    .pathway-link:hover { text-decoration: underline; }
+    .pathway-status { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; }
 
     /* ── Section headings ── */
     .section-title {
@@ -350,6 +383,11 @@
     }
 
     @media (max-width: 640px) {
+      .hero { padding: 4rem 1rem 5.5rem; }
+      .hero p { font-size: 1rem; }
+      .pathways { padding: 0 1rem 1rem; }
+      .pathway-grid { grid-template-columns: 1fr; }
+      .pathway-card { min-height: 0; }
       .videos-section, .shorts-section { padding: 3rem 1rem; }
       .video-grid { grid-template-columns: 1fr; }
       .shorts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -363,11 +401,45 @@
       <img src="assets/kikku-logo.png" alt="Kikku">
     </a>
     <nav>
-      <a href="#videos">Vidjows</a>
-      <a href="#shorts">Shorts</a>
-      <a href="https://www.youtube.com/@KikkuMalti" target="_blank">YouTube</a>
+      <a href="#videos">Kanzunetti</a>
+      <a href="#attivitajiet">Attivitajiet</a>
+      <a href="#edukaturi">Edukaturi</a>
     </nav>
   </header>
+
+  <main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <span class="eyebrow">Merħba fid-dinja ta' Kikku</span>
+      <h1 id="hero-title">Kanzunetti, stejjer u attivitajiet bil-Malti għat-tfal.</h1>
+      <p>Kontenut divertenti u riżorsi utli għall-ġenituri, dawk li jieħdu ħsieb it-tfal, u l-edukaturi.</p>
+    </div>
+  </section>
+
+  <section class="pathways" aria-label="Agħżel minn fejn trid tibda">
+    <div class="pathway-grid">
+      <article class="pathway-card">
+        <span class="pathway-icon" aria-hidden="true">▶</span>
+        <h2>Ara l-kanzunetti</h2>
+        <p>Isma', kanta u ċċaqlaq ma' Kikku bil-kanzunetti tat-tfal bil-Malti.</p>
+        <a class="pathway-link" href="#videos">Ara l-kanzunetti →</a>
+      </article>
+
+      <article class="pathway-card" id="attivitajiet">
+        <span class="pathway-icon" aria-hidden="true">✎</span>
+        <h2>Niżżel attivitajiet b'xejn</h2>
+        <p>Paġni ta' kulur, logħob u tagħlim biex tkompli l-esperjenza wara l-kanzunetta.</p>
+        <span class="pathway-status">Dalwaqt</span>
+      </article>
+
+      <article class="pathway-card" id="edukaturi">
+        <span class="pathway-icon" aria-hidden="true">★</span>
+        <h2>Għall-edukaturi u l-iskejjel</h2>
+        <p>Riżorsi bil-Malti, pakketti skont it-tema u opportunitajiet għall-iskejjel.</p>
+        <span class="pathway-status">Qed nippreparaw din is-sezzjoni</span>
+      </article>
+    </div>
+  </section>
 
   <!-- ── Full Videos ── -->
   <section class="videos-section" id="videos">
@@ -382,6 +454,7 @@
       <div class="shorts-grid" id="shortsGrid"></div>
     </div>
   </section>
+  </main>
 
   <footer>
     <p>Magħmul b'<span>♥</span> għat-tfal li jħobbu l-mużika &nbsp;·&nbsp;
