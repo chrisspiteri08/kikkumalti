@@ -118,12 +118,15 @@
       line-height: 1.7;
     }
     .record-stage {
-      min-height: 340px;
+      min-height: 390px;
       position: relative;
       display: grid;
       place-items: center;
     }
     .record-disc {
+      position: absolute;
+      right: -10px;
+      z-index: 1;
       width: min(310px, 30vw);
       aspect-ratio: 1;
       border: 8px solid #24375f;
@@ -133,6 +136,16 @@
       display: grid;
       place-items: center;
       transform: rotate(-7deg);
+    }
+    .kikku-character {
+      position: absolute;
+      left: -135px;
+      bottom: -55px;
+      z-index: 2;
+      width: min(500px, 45vw);
+      height: auto;
+      filter: drop-shadow(0 24px 22px rgba(0,0,0,0.28));
+      pointer-events: none;
     }
     .record-disc::after {
       content: '♪';
@@ -149,6 +162,7 @@
     }
     .sound-chip {
       position: absolute;
+      z-index: 3;
       padding: 0.5rem 0.75rem;
       color: #172544;
       background: #fff;
@@ -521,7 +535,8 @@
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
       .hero p { font-size: 1rem; }
       .record-stage { min-height: 270px; }
-      .record-disc { width: 220px; }
+      .record-disc { width: 220px; right: 8px; }
+      .kikku-character { width: 390px; left: -110px; bottom: -62px; }
       .sound-chip { font-size: 0.7rem; }
       .pathways { padding: 0 1rem 1rem; }
       .pathways-shell { padding: 0.75rem 1rem 0; }
@@ -559,6 +574,7 @@
       </div>
       <div class="record-stage" aria-hidden="true">
         <div class="record-disc"></div>
+        <img class="kikku-character" src="assets/kikku-character.png" alt="">
         <span class="sound-chip chip-one">Kanta</span>
         <span class="sound-chip chip-two">Ilgħab</span>
         <span class="sound-chip chip-three">Tgħallem</span>
