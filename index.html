@@ -663,7 +663,6 @@
 
       <div class="signup-preview" aria-labelledby="signup-title">
         <h3 id="signup-title">Irċevih bl-email</h3>
-        <p>Il-formola se tkun għall-adulti biss. Qatt mhu se nitolbu email ta' tifel jew tifla.</p>
         <form>
           <fieldset>
             <label for="audience">Int min int?</label>
@@ -676,12 +675,12 @@
             <input id="signup-email" name="email" type="email" placeholder="isem@example.com" disabled>
 
             <div id="children-fields" class="children-fields">
-              <span>Età tat-tfal tiegħek (mhux obbligatorju)</span>
+              <span>Età tat-tfal tiegħek</span>
               <div id="children-list" aria-live="polite">
                 <div class="child-row">
                   <div class="child-field">
                     <label for="child-age-1">Età tat-tifel jew tifla 1</label>
-                    <input id="child-age-1" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="eż. 4">
+                    <input id="child-age-1" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="eż. 4" required>
                   </div>
                 </div>
               </div>
@@ -689,8 +688,8 @@
             </div>
 
             <div id="class-age-field" hidden>
-              <label for="class-age-range">Età tat-tfal fil-klassi tiegħek (mhux obbligatorju)</label>
-              <input id="class-age-range" name="class_age_range" type="text" placeholder="eż. 3–5 snin">
+              <label for="class-age-range">Età tat-tfal fil-klassi tiegħek</label>
+              <input id="class-age-range" name="class_age_range" type="text" placeholder="eż. 3–5 snin" required disabled>
             </div>
 
             <button type="submit" disabled>Abbona u niżżel</button>
@@ -830,6 +829,7 @@
     const childrenFields = document.getElementById('children-fields');
     const childrenList = document.getElementById('children-list');
     const classAgeField = document.getElementById('class-age-field');
+    const classAgeInput = document.getElementById('class-age-range');
     const addChildButton = document.getElementById('add-child');
     let childCount = 1;
 
@@ -837,6 +837,8 @@
       const isEducator = audienceSelect.value === 'educator';
       childrenFields.hidden = isEducator;
       classAgeField.hidden = !isEducator;
+      childrenList.querySelectorAll('input').forEach(input => { input.disabled = isEducator; });
+      classAgeInput.disabled = !isEducator;
     });
 
     addChildButton.addEventListener('click', () => {
@@ -846,7 +848,7 @@
       row.innerHTML = `
         <div class="child-field">
           <label for="child-age-${childCount}">Età tat-tifel jew tifla ${childCount}</label>
-          <input id="child-age-${childCount}" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="eż. 4">
+          <input id="child-age-${childCount}" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="eż. 4" required>
         </div>
         <button class="remove-child-button" type="button" aria-label="Neħħi t-tifel jew tifla ${childCount}">Neħħi</button>
       `;

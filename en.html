@@ -663,7 +663,6 @@
 
       <div class="signup-preview" aria-labelledby="signup-title">
         <h3 id="signup-title">Receive it by email</h3>
-        <p>This form will be for adults only. We will never ask for a child's email address.</p>
         <form>
           <fieldset>
             <label for="audience">Which best describes you?</label>
@@ -676,12 +675,12 @@
             <input id="signup-email" name="email" type="email" placeholder="name@example.com" disabled>
 
             <div id="children-fields" class="children-fields">
-              <span>Ages of your children (optional)</span>
+              <span>Ages of your children</span>
               <div id="children-list" aria-live="polite">
                 <div class="child-row">
                   <div class="child-field">
                     <label for="child-age-1">Age of child 1</label>
-                    <input id="child-age-1" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="e.g. 4">
+                    <input id="child-age-1" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="e.g. 4" required>
                   </div>
                 </div>
               </div>
@@ -689,8 +688,8 @@
             </div>
 
             <div id="class-age-field" hidden>
-              <label for="class-age-range">Age of the children in your class (optional)</label>
-              <input id="class-age-range" name="class_age_range" type="text" placeholder="e.g. 3–5 years">
+              <label for="class-age-range">Age of the children in your class</label>
+              <input id="class-age-range" name="class_age_range" type="text" placeholder="e.g. 3–5 years" required disabled>
             </div>
 
             <button type="submit" disabled>Subscribe and download</button>
@@ -830,6 +829,7 @@
     const childrenFields = document.getElementById('children-fields');
     const childrenList = document.getElementById('children-list');
     const classAgeField = document.getElementById('class-age-field');
+    const classAgeInput = document.getElementById('class-age-range');
     const addChildButton = document.getElementById('add-child');
     let childCount = 1;
 
@@ -837,6 +837,8 @@
       const isEducator = audienceSelect.value === 'educator';
       childrenFields.hidden = isEducator;
       classAgeField.hidden = !isEducator;
+      childrenList.querySelectorAll('input').forEach(input => { input.disabled = isEducator; });
+      classAgeInput.disabled = !isEducator;
     });
 
     addChildButton.addEventListener('click', () => {
@@ -846,7 +848,7 @@
       row.innerHTML = `
         <div class="child-field">
           <label for="child-age-${childCount}">Age of child ${childCount}</label>
-          <input id="child-age-${childCount}" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="e.g. 4">
+          <input id="child-age-${childCount}" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="e.g. 4" required>
         </div>
         <button class="remove-child-button" type="button" aria-label="Remove child ${childCount}">Remove</button>
       `;
