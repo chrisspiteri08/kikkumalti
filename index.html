@@ -312,6 +312,33 @@
       font: 900 0.95rem 'Nunito', sans-serif;
       opacity: 0.55;
     }
+    .children-fields { margin-top: 0.85rem; }
+    .children-fields > span {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-size: 0.82rem;
+      font-weight: 900;
+    }
+    .child-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.5rem;
+      align-items: end;
+      margin-top: 0.55rem;
+    }
+    .child-row:first-child { margin-top: 0; }
+    .child-field label { margin-top: 0; }
+    .signup-preview .add-child-button,
+    .signup-preview .remove-child-button {
+      width: auto;
+      color: var(--accent-dark);
+      background: transparent;
+      border: 1px solid var(--line);
+      opacity: 1;
+      cursor: pointer;
+    }
+    .signup-preview .add-child-button { margin-top: 0.65rem; padding: 0.6rem 0.75rem; }
+    .signup-preview .remove-child-button { margin: 0 0 0.05rem; padding: 0.8rem 0.75rem; }
     .form-note { margin-top: 0.9rem; color: var(--muted); font-size: 0.75rem; line-height: 1.45; }
 
     /* ── Section headings ── */
@@ -648,8 +675,23 @@
             <label for="signup-email">L-email tiegħek</label>
             <input id="signup-email" name="email" type="email" placeholder="isem@example.com" disabled>
 
-            <label id="age-range-label" for="age-range">Età tat-tfal tiegħek (mhux obbligatorju)</label>
-            <input id="age-range" name="age-range" type="text" placeholder="eż. 2 u 5 snin" disabled>
+            <div id="children-fields" class="children-fields">
+              <span>Età tat-tfal tiegħek (mhux obbligatorju)</span>
+              <div id="children-list" aria-live="polite">
+                <div class="child-row">
+                  <div class="child-field">
+                    <label for="child-age-1">Età tat-tifel jew tifla 1</label>
+                    <input id="child-age-1" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="eż. 4">
+                  </div>
+                </div>
+              </div>
+              <button id="add-child" class="add-child-button" type="button">+ Żid tifel jew tifla ieħor</button>
+            </div>
+
+            <div id="class-age-field" hidden>
+              <label for="class-age-range">Età tat-tfal fil-klassi tiegħek (mhux obbligatorju)</label>
+              <input id="class-age-range" name="class_age_range" type="text" placeholder="eż. 3–5 snin">
+            </div>
 
             <button type="submit" disabled>Abbona u niżżel</button>
           </fieldset>
@@ -785,15 +827,32 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
     const audienceSelect = document.getElementById('audience');
-    const ageRangeLabel = document.getElementById('age-range-label');
-    const ageRangeInput = document.getElementById('age-range');
+    const childrenFields = document.getElementById('children-fields');
+    const childrenList = document.getElementById('children-list');
+    const classAgeField = document.getElementById('class-age-field');
+    const addChildButton = document.getElementById('add-child');
+    let childCount = 1;
 
     audienceSelect.addEventListener('change', () => {
       const isEducator = audienceSelect.value === 'educator';
-      ageRangeLabel.textContent = isEducator
-        ? "Età tat-tfal fil-klassi tiegħek (mhux obbligatorju)"
-        : "Età tat-tfal tiegħek (mhux obbligatorju)";
-      ageRangeInput.placeholder = isEducator ? 'eż. 3–5 snin' : 'eż. 2 u 5 snin';
+      childrenFields.hidden = isEducator;
+      classAgeField.hidden = !isEducator;
+    });
+
+    addChildButton.addEventListener('click', () => {
+      childCount += 1;
+      const row = document.createElement('div');
+      row.className = 'child-row';
+      row.innerHTML = `
+        <div class="child-field">
+          <label for="child-age-${childCount}">Età tat-tifel jew tifla ${childCount}</label>
+          <input id="child-age-${childCount}" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="eż. 4">
+        </div>
+        <button class="remove-child-button" type="button" aria-label="Neħħi t-tifel jew tifla ${childCount}">Neħħi</button>
+      `;
+      row.querySelector('.remove-child-button').addEventListener('click', () => row.remove());
+      childrenList.appendChild(row);
+      row.querySelector('input').focus();
     });
   </script>
 
