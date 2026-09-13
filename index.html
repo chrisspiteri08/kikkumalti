@@ -310,8 +310,10 @@
       border: 0;
       border-radius: 10px;
       font: 900 0.95rem 'Nunito', sans-serif;
-      opacity: 0.55;
+      opacity: 1;
+      cursor: pointer;
     }
+    .signup-preview button:disabled { opacity: 0.55; cursor: not-allowed; }
     .children-fields { margin-top: 0.85rem; }
     .children-fields > span {
       display: block;
@@ -339,7 +341,20 @@
     }
     .signup-preview .add-child-button { margin-top: 0.65rem; padding: 0.6rem 0.75rem; }
     .signup-preview .remove-child-button { margin: 0 0 0.05rem; padding: 0.8rem 0.75rem; }
+    .consent-row {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      margin-top: 1rem;
+    }
+    .signup-preview .consent-row input { width: 1.1rem; height: 1.1rem; margin-top: 0.15rem; accent-color: var(--accent); }
+    .signup-preview .consent-row label { margin: 0; line-height: 1.45; font-weight: 700; }
+    .honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
     .form-note { margin-top: 0.9rem; color: var(--muted); font-size: 0.75rem; line-height: 1.45; }
+    .form-status { min-height: 1.4em; margin-top: 0.8rem; font-size: 0.82rem; font-weight: 800; line-height: 1.4; }
+    .form-status.success { color: #18794e; }
+    .form-status.error { color: #b42318; }
 
     /* ── Section headings ── */
     .section-title {
@@ -663,8 +678,13 @@
 
       <div class="signup-preview" aria-labelledby="signup-title">
         <h3 id="signup-title">Irċevih bl-email</h3>
-        <form>
+        <form id="signup-form" action="subscribe.php" method="post">
           <fieldset>
+            <input type="hidden" name="language" value="mt">
+            <div class="honeypot" aria-hidden="true">
+              <label for="website">Website</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
             <label for="audience">Int min int?</label>
             <select id="audience" name="audience">
               <option value="parent">Ġenitur jew persuna li tieħu ħsieb it-tfal</option>
@@ -672,7 +692,7 @@
             </select>
 
             <label for="signup-email">L-email tiegħek</label>
-            <input id="signup-email" name="email" type="email" placeholder="isem@example.com" disabled>
+            <input id="signup-email" name="email" type="email" placeholder="isem@example.com" autocomplete="email" required>
 
             <div id="children-fields" class="children-fields">
               <span>Età tat-tfal tiegħek</span>
@@ -692,10 +712,15 @@
               <input id="class-age-range" name="class_age_range" type="text" placeholder="eż. 3–5 snin" required disabled>
             </div>
 
-            <button type="submit" disabled>Abbona u niżżel</button>
+            <div class="consent-row">
+              <input id="consent" name="consent" type="checkbox" value="yes" required>
+              <label for="consent">Naqbel li nirċievi l-pakkett u emails mingħand Kikku. Nista' nneħħi l-abbonament meta rrid.</label>
+            </div>
+
+            <button id="signup-submit" type="submit">Abbona u niżżel</button>
           </fieldset>
         </form>
-        <p class="form-note">Il-pakkett u s-servizz tal-email għadhom qed jiġu ppreparati. Il-formola tinfetaħ meta jkunu lesti.</p>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
       </div>
     </div>
   </section>
@@ -831,15 +856,20 @@
     const classAgeField = document.getElementById('class-age-field');
     const classAgeInput = document.getElementById('class-age-range');
     const addChildButton = document.getElementById('add-child');
+    const signupForm = document.getElementById('signup-form');
+    const signupSubmit = document.getElementById('signup-submit');
+    const formStatus = document.getElementById('form-status');
     let childCount = 1;
 
-    audienceSelect.addEventListener('change', () => {
+    function updateAudienceFields() {
       const isEducator = audienceSelect.value === 'educator';
       childrenFields.hidden = isEducator;
       classAgeField.hidden = !isEducator;
       childrenList.querySelectorAll('input').forEach(input => { input.disabled = isEducator; });
       classAgeInput.disabled = !isEducator;
-    });
+    }
+
+    audienceSelect.addEventListener('change', updateAudienceFields);
 
     addChildButton.addEventListener('click', () => {
       childCount += 1;
@@ -855,6 +885,35 @@
       row.querySelector('.remove-child-button').addEventListener('click', () => row.remove());
       childrenList.appendChild(row);
       row.querySelector('input').focus();
+    });
+
+    signupForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!signupForm.reportValidity()) return;
+
+      signupSubmit.disabled = true;
+      signupSubmit.textContent = 'Qed nibgħatu…';
+      formStatus.className = 'form-status';
+      formStatus.textContent = '';
+
+      try {
+        const response = await fetch(signupForm.action, { method: 'POST', body: new FormData(signupForm) });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(result.message || 'Ma rnexxilniex nibagħtu l-formola. Erġa’ pprova.');
+
+        formStatus.className = 'form-status success';
+        formStatus.textContent = result.message;
+        signupForm.reset();
+        [...childrenList.querySelectorAll('.child-row')].slice(1).forEach(row => row.remove());
+        childCount = 1;
+        updateAudienceFields();
+      } catch (error) {
+        formStatus.className = 'form-status error';
+        formStatus.textContent = error.message;
+      } finally {
+        signupSubmit.disabled = false;
+        signupSubmit.textContent = 'Abbona u niżżel';
+      }
     });
   </script>
 
