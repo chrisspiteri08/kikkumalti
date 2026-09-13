@@ -26,3 +26,11 @@ The endpoint also accepts a server environment variable named
 - Create and activate the welcome automation for the `Kikku Website` group.
 - Upload the activity pack and add its private download link to the welcome email.
 - Test with an email address that is not already an active subscriber.
+
+## Activity pack
+
+After deployment, the optimized booklet is available at:
+
+`https://kikkumalti.com/assets/downloads/kikku-ktejjeb-1.pdf`
+
+Use this URL for the download button in the MailerLite welcome email.
