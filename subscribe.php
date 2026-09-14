@@ -37,9 +37,10 @@ if (trim((string) ($_POST['website'] ?? '')) !== '') {
 
 $email = filter_var(trim((string) ($_POST['email'] ?? '')), FILTER_VALIDATE_EMAIL);
 $audience = (string) ($_POST['audience'] ?? '');
+$country = trim((string) ($_POST['country'] ?? ''));
 $consent = isset($_POST['consent']) && $_POST['consent'] === 'yes';
 
-if ($email === false || !in_array($audience, ['parent', 'educator'], true) || !$consent) {
+if ($email === false || !in_array($audience, ['parent', 'educator'], true) || strlen($country) < 2 || strlen($country) > 80 || preg_match('/[\r\n]/', $country) || !$consent) {
     respond(422, $messages[$language]['invalid']);
 }
 
@@ -92,6 +93,7 @@ $payload = [
         'child_ages' => implode(', ', $childAges),
         'class_age_range' => $classAgeRange,
         'language' => $language,
+        'country' => $country,
     ],
     'ip_address' => filter_var($_SERVER['REMOTE_ADDR'] ?? '', FILTER_VALIDATE_IP) ?: null,
 ];
