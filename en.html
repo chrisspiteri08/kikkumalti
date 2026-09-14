@@ -298,6 +298,18 @@
     }
     .signup-preview h3 { margin-bottom: 0.35rem; font-size: 1.2rem; }
     .signup-preview > p { margin-bottom: 1.2rem; color: var(--muted); font-size: 0.88rem; line-height: 1.5; }
+    .homepage-signup-cta form, .homepage-signup-cta .form-status { display: none; }
+    .booklet-page-link {
+      display: inline-block;
+      width: 100%;
+      padding: 0.9rem 1rem;
+      color: #fff;
+      background: var(--accent);
+      border-radius: 10px;
+      font: 900 0.95rem 'Nunito', sans-serif;
+      text-align: center;
+      text-decoration: none;
+    }
     .signup-preview fieldset { min-width: 0; border: 0; }
     .signup-preview label { display: block; margin: 0.85rem 0 0.35rem; font-size: 0.82rem; font-weight: 900; }
     .signup-preview input, .signup-preview select {
@@ -680,7 +692,7 @@
       <article class="pathway-card" id="attivitajiet">
         <span class="pathway-number" aria-hidden="true">02</span>
         <div><h2>Download a free drawing booklet</h2><p>Ten pages for children to draw and colour Kikku however they like.</p></div>
-        <a class="pathway-link" href="#pakkett">View the booklet →</a>
+        <a class="pathway-link" href="en/booklet/">View the booklet →</a>
       </article>
 
       <article class="pathway-card" id="edukaturi">
@@ -707,8 +719,10 @@
 
       <img class="booklet-mockup" src="assets/kikku-booklet-mockup.png" alt="Kikku's drawing booklet shown with colouring pages" width="639" height="700" loading="lazy">
 
-      <div class="signup-preview" aria-labelledby="signup-title">
-        <h3 id="signup-title">Receive it by email</h3>
+      <div class="signup-preview homepage-signup-cta" aria-labelledby="signup-title">
+        <h3 id="signup-title">Ready to download it?</h3>
+        <p>Visit the booklet page, enter your details, and receive it by email.</p>
+        <a class="booklet-page-link" href="en/booklet/">Download the free booklet →</a>
         <form id="signup-form" action="subscribe.php" method="post" novalidate>
           <fieldset>
             <input type="hidden" name="language" value="en">
