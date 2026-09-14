@@ -251,8 +251,9 @@
     }
     .free-pack-panel {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: minmax(0, 0.9fr) minmax(190px, 0.65fr) minmax(320px, 1fr);
       gap: 2.5rem;
+      align-items: center;
       padding: 2.5rem;
       background: var(--surface);
       border: 1px solid var(--line);
@@ -281,6 +282,14 @@
       list-style: none;
     }
     .pack-list li::before { content: '✓'; margin-right: 0.65rem; color: var(--accent-dark); font-weight: 900; }
+    .booklet-mockup {
+      display: block;
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+      margin: 0 auto;
+      filter: drop-shadow(0 18px 24px rgba(4, 16, 40, 0.28));
+    }
     .signup-preview {
       padding: 1.5rem;
       background: var(--page);
@@ -595,6 +604,11 @@
       line-height: 1;
     }
 
+    @media (max-width: 900px) {
+      .free-pack-panel { grid-template-columns: minmax(0, 0.75fr) minmax(320px, 1fr); }
+      .pack-copy { grid-column: 1 / -1; }
+    }
+
     @media (max-width: 640px) {
       .hero { padding: 4rem 1rem 5.5rem; }
       .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
@@ -610,6 +624,8 @@
       .pathway-link, .pathway-status { grid-column: 2; padding: 0 0 0.4rem; white-space: normal; }
       .free-pack-section { padding: 2rem 1rem 3rem; }
       .free-pack-panel { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.35rem; }
+      .pack-copy { grid-column: auto; }
+      .booklet-mockup { max-width: 260px; }
       .videos-section, .shorts-section { padding: 3rem 1rem; }
       .video-grid { grid-template-columns: 1fr; }
       .shorts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -688,6 +704,8 @@
           <li>Jasal direttament fl-email tiegħek</li>
         </ul>
       </div>
+
+      <img class="booklet-mockup" src="assets/kikku-booklet-mockup.png" alt="Il-ktejjeb tat-tpinġija ta' Kikku, muri bil-paġni tat-tpinġija" width="639" height="700" loading="lazy">
 
       <div class="signup-preview" aria-labelledby="signup-title">
         <h3 id="signup-title">Irċevih bl-email</h3>
