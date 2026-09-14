@@ -13,8 +13,8 @@
     :root { --navy:#091a3a; --panel:#10264e; --field:#182f59; --line:#304970; --pink:#ee55a6; --white:#f9fbff; --muted:#c5d1e5; }
     * { box-sizing:border-box; margin:0; padding:0; }
     body { min-height:100vh; color:var(--white); background:radial-gradient(circle at 12% 10%,#17386a 0,transparent 34%),var(--navy); font-family:'Nunito',Arial,sans-serif; }
-    a { color:inherit; }.topbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; width:100%; padding:1.15rem max(1.5rem, calc((100% - 1140px) / 2 + 1.5rem)); background:#fff; }
-    .logo { display:block; width:150px; height:auto; }.language { padding:.48rem .7rem; color:#fff; background:var(--navy); border-radius:999px; font-size:.82rem; font-weight:900; text-decoration:none; }
+    a { color:inherit; }.topbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; width:100%; padding:1.15rem max(1.5rem, calc((100% - 1140px) / 2 + 1.5rem)); }
+    .logo { display:block; width:150px; height:auto; }.language { padding:.48rem .7rem; color:var(--navy); background:#fff; border-radius:999px; font-size:.82rem; font-weight:900; text-decoration:none; }
     main { width:min(1140px,calc(100% - 2rem)); margin:0 auto; padding:1.5rem 0 4rem; }.landing { display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,.78fr); gap:clamp(2rem,5vw,5rem); align-items:center; }
     .offer { text-align:center; }.eyebrow { display:inline-block; margin-bottom:.8rem; color:#b9ef91; font-size:.8rem; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
     h1 { max-width:700px; margin:0 auto 1rem; font-size:clamp(2.25rem,5vw,4.25rem); line-height:1.02; letter-spacing:-.035em; }.lead { max-width:620px; margin:0 auto; color:var(--muted); font-size:clamp(1rem,2vw,1.18rem); line-height:1.6; }
@@ -33,7 +33,7 @@
   </style>
 </head>
 <body>
-  <header class="topbar"><a href="../../en.html" aria-label="Back to the homepage"><img class="logo" src="../../assets/kikku-logo.png" width="190" alt="Kikku"></a><a class="language" href="../../ktejjeb/" lang="mt">Malti</a></header>
+  <header class="topbar"><a href="../../en.html" aria-label="Back to the homepage"><img class="logo" src="../../assets/kikku-logo-transparent.png" width="600" height="215" alt="Kikku"></a><a class="language" href="../../ktejjeb/" lang="mt">Malti</a></header>
   <main><section class="landing" aria-labelledby="page-title">
     <div class="offer"><span class="eyebrow">A free gift from Kikku</span><h1 id="page-title">Download the free drawing booklet</h1><p class="lead">Ten fun pages for children to draw and colour Kikku however they like.</p><img class="mockup" src="../../assets/kikku-booklet-mockup.png" width="639" height="700" alt="Kikku's booklet shown with drawing and colouring pages"><ul class="benefits"><li>10 pages</li><li>Printable PDF</li><li>Delivered to your email</li></ul></div>
     <div class="form-card" aria-labelledby="signup-title"><h2 id="signup-title">Where should we send your booklet?</h2><p class="form-intro">Fill in your details and we'll email you the download link.</p>
