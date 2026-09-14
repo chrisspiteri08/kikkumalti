@@ -315,6 +315,17 @@
     }
     .signup-preview button:disabled { opacity: 0.55; cursor: not-allowed; }
     .children-fields { margin-top: 0.85rem; }
+    .field-hint {
+      display: block;
+      margin: 0.25rem 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.45;
+    }
+    .signup-preview [aria-invalid="true"] {
+      border-color: #ff7ab8;
+      box-shadow: 0 0 0 3px rgba(255, 122, 184, 0.18);
+    }
     .children-fields > span {
       display: block;
       margin-bottom: 0.35rem;
@@ -678,7 +689,7 @@
 
       <div class="signup-preview" aria-labelledby="signup-title">
         <h3 id="signup-title">Receive it by email</h3>
-        <form id="signup-form" action="subscribe.php" method="post">
+        <form id="signup-form" action="subscribe.php" method="post" novalidate>
           <fieldset>
             <input type="hidden" name="language" value="en">
             <div class="honeypot" aria-hidden="true">
@@ -691,16 +702,21 @@
               <option value="educator">Educator or school</option>
             </select>
 
-            <label for="signup-email">Your email</label>
-            <input id="signup-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+            <label for="signup-email">Your email <span aria-hidden="true">*</span></label>
+            <input id="signup-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required aria-describedby="email-hint">
+            <small id="email-hint" class="field-hint">This is where we'll send your booklet.</small>
 
             <div id="children-fields" class="children-fields">
               <span>Ages of your children</span>
+              <small class="field-hint">Select each child's age. You can add more than one child.</small>
               <div id="children-list" aria-live="polite">
                 <div class="child-row">
                   <div class="child-field">
-                    <label for="child-age-1">Age of child 1</label>
-                    <input id="child-age-1" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="e.g. 4" required>
+                    <label for="child-age-1">Age of child 1 <span aria-hidden="true">*</span></label>
+                    <select id="child-age-1" name="child_age[]" required>
+                      <option value="" selected disabled>Select age</option>
+                      <option value="0">Under 1</option><option value="1">1 year</option><option value="2">2 years</option><option value="3">3 years</option><option value="4">4 years</option><option value="5">5 years</option><option value="6">6 years</option><option value="7">7 years</option><option value="8">8 years</option><option value="9">9 years</option><option value="10">10 years</option><option value="11">11 years</option><option value="12">12 years</option><option value="13">13 years</option><option value="14">14 years</option><option value="15">15 years</option><option value="16">16 years</option><option value="17">17 years</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -708,13 +724,13 @@
             </div>
 
             <div id="class-age-field" hidden>
-              <label for="class-age-range">Age of the children in your class</label>
+              <label for="class-age-range">Age of the children in your class <span aria-hidden="true">*</span></label>
               <input id="class-age-range" name="class_age_range" type="text" placeholder="e.g. 3–5 years" required disabled>
             </div>
 
             <div class="consent-row">
               <input id="consent" name="consent" type="checkbox" value="yes" required>
-              <label for="consent">I agree to receive the pack and emails from Kikku. I can unsubscribe at any time.</label>
+              <label for="consent">I agree to receive the pack and emails from Kikku. I can unsubscribe at any time. <span aria-hidden="true">*</span></label>
             </div>
 
             <button id="signup-submit" type="submit">Subscribe and download</button>
@@ -865,7 +881,7 @@
       const isEducator = audienceSelect.value === 'educator';
       childrenFields.hidden = isEducator;
       classAgeField.hidden = !isEducator;
-      childrenList.querySelectorAll('input').forEach(input => { input.disabled = isEducator; });
+      childrenList.querySelectorAll('input, select').forEach(field => { field.disabled = isEducator; });
       classAgeInput.disabled = !isEducator;
     }
 
@@ -877,19 +893,39 @@
       row.className = 'child-row';
       row.innerHTML = `
         <div class="child-field">
-          <label for="child-age-${childCount}">Age of child ${childCount}</label>
-          <input id="child-age-${childCount}" name="child_age[]" type="number" min="0" max="17" inputmode="numeric" placeholder="e.g. 4" required>
+          <label for="child-age-${childCount}">Age of child ${childCount} <span aria-hidden="true">*</span></label>
+          <select id="child-age-${childCount}" name="child_age[]" required>
+            <option value="" selected disabled>Select age</option>
+            <option value="0">Under 1</option><option value="1">1 year</option><option value="2">2 years</option><option value="3">3 years</option><option value="4">4 years</option><option value="5">5 years</option><option value="6">6 years</option><option value="7">7 years</option><option value="8">8 years</option><option value="9">9 years</option><option value="10">10 years</option><option value="11">11 years</option><option value="12">12 years</option><option value="13">13 years</option><option value="14">14 years</option><option value="15">15 years</option><option value="16">16 years</option><option value="17">17 years</option>
+          </select>
         </div>
         <button class="remove-child-button" type="button" aria-label="Remove child ${childCount}">Remove</button>
       `;
       row.querySelector('.remove-child-button').addEventListener('click', () => row.remove());
       childrenList.appendChild(row);
-      row.querySelector('input').focus();
+      row.querySelector('select').focus();
+    });
+
+    signupForm.addEventListener('input', event => {
+      event.target.removeAttribute('aria-invalid');
+    });
+    signupForm.addEventListener('change', event => {
+      event.target.removeAttribute('aria-invalid');
     });
 
     signupForm.addEventListener('submit', async event => {
       event.preventDefault();
-      if (!signupForm.reportValidity()) return;
+      signupForm.querySelectorAll('[aria-invalid="true"]').forEach(field => field.removeAttribute('aria-invalid'));
+      const invalidField = signupForm.querySelector(':invalid');
+      if (invalidField) {
+        invalidField.setAttribute('aria-invalid', 'true');
+        formStatus.className = 'form-status error';
+        formStatus.textContent = invalidField === document.getElementById('consent')
+          ? 'Please agree before we receive and use your details.'
+          : 'Please complete the highlighted field before continuing.';
+        invalidField.focus();
+        return;
+      }
 
       signupSubmit.disabled = true;
       signupSubmit.textContent = 'Sending…';
