@@ -22,7 +22,7 @@ The endpoint also accepts a server environment variable named
 
 ## Before enabling the form
 
-- Enable double opt-in for API and integrations in MailerLite.
+- Keep double opt-in for API and integrations disabled. The website records explicit consent and adds the subscriber as active so the booklet automation can start immediately.
 - Create and activate the welcome automation for the `Kikku Website` group.
 - Upload the activity pack and add its private download link to the welcome email.
 - Test with an email address that is not already an active subscriber.

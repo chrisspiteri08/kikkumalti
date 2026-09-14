@@ -21,12 +21,12 @@ $messages = [
     'mt' => [
         'invalid' => 'Jekk jogħġbok iċċekkja d-dettalji u erġa’ pprova.',
         'unavailable' => 'Is-servizz tal-email għadu mhux disponibbli. Erġa’ pprova aktar tard.',
-        'success' => 'Grazzi! Iċċekkja l-email tiegħek biex tikkonferma l-abbonament.',
+        'success' => 'Grazzi! Iċċekkja l-email tiegħek — il-ktejjeb dalwaqt jasal.',
     ],
     'en' => [
         'invalid' => 'Please check your details and try again.',
         'unavailable' => 'The email service is not available yet. Please try again later.',
-        'success' => 'Thank you! Check your email to confirm your subscription.',
+        'success' => 'Thank you! Check your email — your booklet is on its way.',
     ],
 ];
 
@@ -85,7 +85,7 @@ if ($apiToken === '') {
 
 $payload = [
     'email' => $email,
-    'status' => 'unconfirmed',
+    'status' => 'active',
     'groups' => ['198528654772274665'],
     'fields' => [
         'audience' => $audience,
