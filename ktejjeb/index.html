@@ -21,9 +21,9 @@
     * { box-sizing:border-box; margin:0; padding:0; }
     body { min-height:100vh; color:var(--white); background:radial-gradient(circle at 12% 10%, #17386a 0, transparent 34%), var(--navy); font-family:'Nunito',Arial,sans-serif; }
     a { color:inherit; }
-    .topbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; max-width:1140px; margin:auto; padding:1.15rem 1.5rem; }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:1rem; width:100%; padding:1.15rem max(1.5rem, calc((100% - 1140px) / 2 + 1.5rem)); background:#fff; }
     .logo { display:block; width:150px; height:auto; }
-    .language { padding:.48rem .7rem; color:var(--navy); background:#fff; border-radius:999px; font-size:.82rem; font-weight:900; text-decoration:none; }
+    .language { padding:.48rem .7rem; color:#fff; background:var(--navy); border-radius:999px; font-size:.82rem; font-weight:900; text-decoration:none; }
     main { width:min(1140px, calc(100% - 2rem)); margin:0 auto; padding:1.5rem 0 4rem; }
     .landing { display:grid; grid-template-columns:minmax(0,1fr) minmax(360px,.78fr); gap:clamp(2rem,5vw,5rem); align-items:center; }
     .offer { text-align:center; }
