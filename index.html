@@ -421,6 +421,40 @@
       gap: 1.5rem;
     }
 
+    .youtube-subscribe-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.25rem;
+    }
+    .youtube-subscribe {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      padding: 0.85rem 1.35rem;
+      border-radius: 999px;
+      background: #ff0033;
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 900;
+      text-decoration: none;
+      box-shadow: 0 7px 18px rgba(255,0,51,0.22);
+      transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .youtube-subscribe:hover {
+      transform: translateY(-2px);
+      background: #d9002b;
+      box-shadow: 0 10px 24px rgba(255,0,51,0.3);
+    }
+    .youtube-subscribe:focus-visible {
+      outline: 3px solid #75c9ee;
+      outline-offset: 4px;
+    }
+    .youtube-subscribe-icon {
+      font-size: 1.05rem;
+      line-height: 1;
+    }
+
     .video-card {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -779,6 +813,9 @@
   <section class="videos-section" id="videos">
     <h2 class="section-title">🎬 Id-Diski Tiegħi</h2>
     <div class="video-grid" id="videoGrid"></div>
+    <div class="youtube-subscribe-wrap">
+      <a class="youtube-subscribe" href="https://www.youtube.com/@KikkuMalti?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><span class="youtube-subscribe-icon" aria-hidden="true">▶</span> Abbona għall-kanal ta' Kikku</a>
+    </div>
   </section>
 
   <!-- ── Shorts ── -->
@@ -786,13 +823,16 @@
     <div class="shorts-inner">
       <h2 class="section-title">⚡ Shorts</h2>
       <div class="shorts-grid" id="shortsGrid"></div>
+      <div class="youtube-subscribe-wrap">
+        <a class="youtube-subscribe" href="https://www.youtube.com/@KikkuMalti?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><span class="youtube-subscribe-icon" aria-hidden="true">▶</span> Ara aktar u abbona fuq YouTube</a>
+      </div>
     </div>
   </section>
   </main>
 
   <footer>
     <p>Magħmul b'<span>♥</span> għat-tfal li jħobbu l-mużika &nbsp;·&nbsp;
-      <a href="https://www.youtube.com/@KikkuMalti" target="_blank">Abbona fuq YouTube</a>
+      <a href="https://www.youtube.com/@KikkuMalti?sub_confirmation=1" target="_blank" rel="noopener noreferrer">Abbona fuq YouTube</a>
       &nbsp;·&nbsp; Kikkumalti &copy; 2026
     </p>
   </footer>
