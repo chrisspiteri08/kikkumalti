@@ -127,6 +127,35 @@
       max-width: 600px;
       line-height: 1.7;
     }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.85rem;
+      margin-top: 1.75rem;
+    }
+    .hero-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 48px;
+      padding: 0.8rem 1.25rem;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      font: inherit;
+      font-size: 0.92rem;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .hero-action:hover { transform: translateY(-2px); }
+    .hero-action:focus-visible { outline: 3px solid #75c9ee; outline-offset: 4px; }
+    .hero-action-song { background: var(--accent); color: #fff; }
+    .hero-action-song:hover { background: #d94d9b; }
+    .hero-action-youtube { background: transparent; border-color: #ff0033; color: #fff; }
+    .hero-action-youtube:hover { background: #ff0033; }
     .record-stage {
       min-height: 390px;
       position: relative;
@@ -709,6 +738,10 @@
         <span class="eyebrow">Merħba fid-dinja ta' Kikku</span>
         <h1 id="hero-title">Diski, stejjer u attivitajiet bil-Malti għat-tfal.</h1>
         <p>Kontenut divertenti u riżorsi utli għall-ġenituri, dawk li jieħdu ħsieb it-tfal, u l-edukaturi.</p>
+        <div class="hero-actions" aria-label="Ibda minn hawn">
+          <button class="hero-action hero-action-song" id="featuredSongButton" type="button"><span aria-hidden="true">▶</span> Isma' “Lura l-Iskola”</button>
+          <a class="hero-action hero-action-youtube" href="https://www.youtube.com/@KikkuMalti?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> Subscribe fuq YouTube</a>
+        </div>
       </div>
       <div class="record-stage" aria-hidden="true">
         <div class="record-disc"></div>
@@ -821,7 +854,7 @@
 
   <!-- ── Full Videos ── -->
   <section class="videos-section" id="videos">
-    <h2 class="section-title">🎬 Id-Diski Tiegħi</h2>
+    <h2 class="section-title">🎬 Id-Diski Kollha</h2>
     <div class="video-grid" id="videoGrid"></div>
     <div class="youtube-subscribe-wrap">
       <a class="youtube-subscribe" href="https://www.youtube.com/@KikkuMalti?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><span class="youtube-subscribe-icon" aria-hidden="true">▶</span> Subscribe fuq YouTube</a>
@@ -939,6 +972,7 @@
     const modalBox   = document.getElementById('modalBox');
     const modalFrame = document.getElementById('modalFrame');
     const modalClose = document.getElementById('modalClose');
+    const featuredSongButton = document.getElementById('featuredSongButton');
 
     function openModal(id, isShort) {
       modalFrame.src = `https://www.youtube.com/embed/${id}?rel=0`;
@@ -952,6 +986,7 @@
     }
 
     modalClose.addEventListener('click', closeModal);
+    featuredSongButton.addEventListener('click', () => openModal('ynvM16NfSMI', false));
     modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
