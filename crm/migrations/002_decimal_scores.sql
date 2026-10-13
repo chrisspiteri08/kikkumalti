@@ -1,0 +1,1 @@
+ALTER TABLE prospects MODIFY score DECIMAL(4,1) NULL;

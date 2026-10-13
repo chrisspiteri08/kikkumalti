@@ -53,6 +53,13 @@ function take_flash(): ?array { $flash = $_SESSION['crm_flash'] ?? null; unset($
 function redirect(string $path): never { header('Location: ' . $path, true, 303); exit; }
 function valid_choice(string $value, array $choices, string $fallback): string { return in_array($value, $choices, true) ? $value : $fallback; }
 function date_or_null(string $value): ?string { return preg_match('/^\d{4}-\d{2}-\d{2}$/', $value) ? $value : null; }
+function score_or_null(string $value): ?string {
+    $value = str_replace(',', '.', trim($value));
+    if ($value === '') return null;
+    if (!is_numeric($value) || (float) $value < 0 || (float) $value > 10) return null;
+    return rtrim(rtrim(number_format((float) $value, 1, '.', ''), '0'), '.');
+}
+function score_label(mixed $value): string { return $value === null || $value === '' ? '—' : rtrim(rtrim(number_format((float) $value, 1, '.', ''), '0'), '.') . '/10'; }
 function status_class(string $status): string { return 'status-' . strtolower(preg_replace('/[^a-z]+/', '-', iconv('UTF-8', 'ASCII//TRANSLIT', $status) ?: $status)); }
 function prospect_url(int $id): string { return 'prospect.php?id=' . $id; }
 
@@ -86,13 +93,13 @@ function add_activity(int $prospectId, string $type, string $note = '', ?string 
 function prospect_payload(): array
 {
     $text = static fn (string $key, int $limit = 20000): string => mb_substr(trim((string) ($_POST[$key] ?? '')), 0, $limit);
-    $score = filter_var($_POST['score'] ?? null, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0, 'max_range' => 10]]);
+    $score = score_or_null((string) ($_POST['score'] ?? ''));
     return [
         'prospect' => $text('prospect', 190), 'category' => $text('category', 120),
         'opportunity_type' => valid_choice($text('opportunity_type', 40), CRM_OPPORTUNITY_TYPES, 'Strategic Collab'),
         'website' => $text('website', 500), 'social_links' => $text('social_links'), 'why_kikku_fits' => $text('why_kikku_fits'),
         'partnership_idea' => $text('partnership_idea'), 'commercial_potential' => $text('commercial_potential'),
-        'strategic_value' => $text('strategic_value'), 'score' => $score === false ? null : $score,
+        'strategic_value' => $text('strategic_value'), 'score' => $score,
         'contact_person' => $text('contact_person', 190), 'contact_role' => $text('contact_role', 190), 'email' => $text('email', 190),
         'social_contact' => $text('social_contact', 500), 'best_channel' => $text('best_channel', 80),
         'status' => valid_choice($text('status', 40), CRM_STATUSES, 'Researching'), 'last_contact' => date_or_null($text('last_contact', 10)),

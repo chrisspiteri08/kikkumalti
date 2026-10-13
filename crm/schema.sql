@@ -20,7 +20,7 @@ CREATE TABLE prospects (
   partnership_idea TEXT NULL,
   commercial_potential TEXT NULL,
   strategic_value TEXT NULL,
-  score TINYINT UNSIGNED NULL,
+  score DECIMAL(4,1) NULL,
   contact_person VARCHAR(190) NOT NULL DEFAULT '',
   contact_role VARCHAR(190) NOT NULL DEFAULT '',
   email VARCHAR(190) NOT NULL DEFAULT '',
