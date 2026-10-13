@@ -1,0 +1,8 @@
+Options -Indexes
+DirectoryIndex index.php
+
+# Configure cPanel Directory Privacy for this directory after deployment.
+# It adds the authentication rules without storing the password in Git.
+<FilesMatch "\.(sql|example|md)$">
+  Require all denied
+</FilesMatch>
