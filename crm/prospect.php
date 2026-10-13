@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/layout.php';
+require_login();
 $pdo = db();
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT) ?: 0;
 $prospect = null;

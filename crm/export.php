@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/bootstrap.php';
+require_login();
 header('Content-Type: text/csv; charset=utf-8');
 header('Content-Disposition: attachment; filename="kikku-partnerships-backup-' . date('Y-m-d') . '.csv"');
 $out = fopen('php://output', 'wb');

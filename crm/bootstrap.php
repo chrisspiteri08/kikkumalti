@@ -56,6 +56,27 @@ function date_or_null(string $value): ?string { return preg_match('/^\d{4}-\d{2}
 function status_class(string $status): string { return 'status-' . strtolower(preg_replace('/[^a-z]+/', '-', iconv('UTF-8', 'ASCII//TRANSLIT', $status) ?: $status)); }
 function prospect_url(int $id): string { return 'prospect.php?id=' . $id; }
 
+function current_user(): ?array
+{
+    if (empty($_SESSION['crm_user_id'])) return null;
+    static $user;
+    if (is_array($user)) return $user;
+    $stmt = db()->prepare('SELECT id, email, full_name FROM crm_users WHERE id = ? AND is_active = 1');
+    $stmt->execute([(int) $_SESSION['crm_user_id']]);
+    $user = $stmt->fetch() ?: null;
+    if (!$user) unset($_SESSION['crm_user_id']);
+    return $user;
+}
+function require_login(): void
+{
+    if (!current_user()) redirect('login.php');
+}
+function login_user(array $user): void
+{
+    session_regenerate_id(true);
+    $_SESSION['crm_user_id'] = (int) $user['id'];
+}
+
 function add_activity(int $prospectId, string $type, string $note = '', ?string $date = null): void
 {
     $stmt = db()->prepare('INSERT INTO activities (prospect_id, activity_type, note, activity_date) VALUES (?, ?, ?, ?)');

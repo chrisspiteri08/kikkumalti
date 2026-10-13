@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/layout.php';
+require_login();
 
 if (isset($_GET['reset'])) {
     unset($_SESSION['crm_import']);

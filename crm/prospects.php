@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/layout.php';
+require_login();
 $where = []; $params = [];
 $search = trim((string) ($_GET['q'] ?? ''));
 if ($search !== '') { $where[] = '(prospect LIKE ? OR category LIKE ? OR contact_person LIKE ? OR email LIKE ?)'; for ($i=0;$i<4;$i++) $params[] = '%' . $search . '%'; }

@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/layout.php';
+require_login();
 $pdo = db();
 $today = date('Y-m-d');
 $week = date('Y-m-d', strtotime('+7 days'));
