@@ -44,11 +44,11 @@ if ($started === false || $started === null || time() - $started < 3 || time() -
 $name = trim((string) ($_POST['name'] ?? ''));
 $business = trim((string) ($_POST['business'] ?? ''));
 $email = filter_var(trim((string) ($_POST['email'] ?? '')), FILTER_VALIDATE_EMAIL);
-$interest = trim((string) ($_POST['interest'] ?? ''));
+$interest = trim((string) ($_POST['interest'] ?? 'General collaboration enquiry'));
 $idea = trim((string) ($_POST['idea'] ?? ''));
 $allowedInterests = ['Series sponsorship', 'Original song and animation', 'Seasonal campaign', 'Educational collaboration', 'Other / not sure yet'];
 
-if ($name === '' || mb_strlen($name) > 120 || $business === '' || mb_strlen($business) > 160 || $email === false || !in_array($interest, $allowedInterests, true) || $idea === '' || mb_strlen($idea) > 5000 || preg_match('/[\r\n]/', $name.$business)) {
+if ($name === '' || mb_strlen($name) > 120 || $business === '' || mb_strlen($business) > 160 || $email === false || ($interest !== 'General collaboration enquiry' && !in_array($interest, $allowedInterests, true)) || $idea === '' || mb_strlen($idea) > 5000 || preg_match('/[\r\n]/', $name.$business)) {
     reply(422, $messages[$language]['invalid']);
 }
 
