@@ -22,12 +22,14 @@ $messages = [
         'slow' => 'Please wait a moment before submitting the form.',
         'unavailable' => 'We could not send your enquiry right now. Please try again later.',
         'success' => 'Thank you — Chris will be in touch soon.',
+        'sponsor_success' => 'Thanks for your interest! Chris will get back to you to discuss the opportunity.',
     ],
     'mt' => [
         'invalid' => 'Jekk jogħġbok imla l-oqsma meħtieġa u erġa’ pprova.',
         'slow' => 'Jekk jogħġbok stenna ftit qabel tibgħat il-formola.',
         'unavailable' => 'Ma rnexxilniex nibagħtu l-mistoqsija bħalissa. Erġa’ pprova aktar tard.',
         'success' => 'Grazzi — Chris se jikkuntattjak dalwaqt.',
+        'sponsor_success' => 'Grazzi tal-interess tiegħek! Chris se jikkuntattjak biex jiddiskuti l-opportunità.',
     ],
 ];
 
@@ -46,9 +48,11 @@ $business = trim((string) ($_POST['business'] ?? ''));
 $email = filter_var(trim((string) ($_POST['email'] ?? '')), FILTER_VALIDATE_EMAIL);
 $interest = trim((string) ($_POST['interest'] ?? 'General collaboration enquiry'));
 $idea = trim((string) ($_POST['idea'] ?? ''));
+$source = trim((string) ($_POST['enquiry_source'] ?? ''));
+$isSponsorship = $source === 'Bongu Ghalik sponsorship';
 $allowedInterests = ['Series sponsorship', 'Original song and animation', 'Seasonal campaign', 'Educational collaboration', 'Other / not sure yet'];
 
-if ($name === '' || mb_strlen($name) > 120 || $business === '' || mb_strlen($business) > 160 || $email === false || ($interest !== 'General collaboration enquiry' && !in_array($interest, $allowedInterests, true)) || $idea === '' || mb_strlen($idea) > 5000 || preg_match('/[\r\n]/', $name.$business)) {
+if ($name === '' || mb_strlen($name) > 120 || $business === '' || mb_strlen($business) > 160 || $email === false || ($interest !== 'General collaboration enquiry' && !in_array($interest, $allowedInterests, true)) || (!$isSponsorship && $idea === '') || mb_strlen($idea) > 5000 || preg_match('/[\r\n]/', $name.$business)) {
     reply(422, $messages[$language]['invalid']);
 }
 
@@ -72,6 +76,7 @@ $body = "A new partnership enquiry was submitted on kikkumalti.com.\n\n"
     . "Business / organisation: {$business}\n"
     . "Email: {$email}\n"
     . "Interested in: {$interest}\n"
+    . "Enquiry source: " . ($source !== '' ? $source : 'Website') . "\n"
     . "Language: {$language}\n\n"
     . "Idea:\n{$idea}\n";
 $headers = [
@@ -86,4 +91,4 @@ if (!mail($recipient, $subject, $body, implode("\r\n", $headers))) {
     reply(502, $messages[$language]['unavailable']);
 }
 
-reply(200, $messages[$language]['success']);
+reply(200, $messages[$language][$isSponsorship ? 'sponsor_success' : 'success']);
