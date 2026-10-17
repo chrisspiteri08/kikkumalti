@@ -5,6 +5,7 @@ const CRM_STATUSES = ['Researching', 'Draft Saved', 'Ready to Send', 'Sent Manua
 const CRM_OPPORTUNITY_TYPES = ['Paid', 'Value Exchange', 'Strategic Collab', 'Not Worth Pursuing'];
 const CRM_DRAFT_STATUSES = ['Draft', 'Ready to Send', 'Sent Manually', 'Replied', 'Closed'];
 const CRM_ACTIVITY_TYPES = ['Research added', 'Draft prepared', 'Email sent manually', 'Reply received', 'Follow-up due', 'Follow-up completed', 'Note added'];
+const CRM_SESSION_LIFETIME = 259200; // Three days, in seconds.
 
 $configPath = dirname(__DIR__, 2) . '/kikku-crm-config.php';
 if (!is_readable($configPath)) {
@@ -16,7 +17,9 @@ $config = require $configPath;
 date_default_timezone_set((string) ($config['timezone'] ?? 'Europe/Malta'));
 
 if (session_status() !== PHP_SESSION_ACTIVE) {
+    ini_set('session.gc_maxlifetime', (string) CRM_SESSION_LIFETIME);
     session_set_cookie_params([
+        'lifetime' => CRM_SESSION_LIFETIME,
         'httponly' => true,
         'secure' => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
         'samesite' => 'Strict',
@@ -42,6 +45,17 @@ function db(): PDO
 }
 
 function e(?string $value): string { return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
+function refresh_crm_session_cookie(): void {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), session_id(), [
+        'expires' => time() + CRM_SESSION_LIFETIME,
+        'path' => $params['path'] ?: '/',
+        'domain' => $params['domain'] ?? '',
+        'secure' => (bool) $params['secure'],
+        'httponly' => true,
+        'samesite' => 'Strict',
+    ]);
+}
 function csrf_token(): string { return $_SESSION['crm_csrf'] ??= bin2hex(random_bytes(32)); }
 function verify_csrf(): void {
     if (!hash_equals($_SESSION['crm_csrf'] ?? '', (string) ($_POST['csrf'] ?? ''))) {
@@ -66,12 +80,18 @@ function prospect_url(int $id): string { return 'prospect.php?id=' . $id; }
 function current_user(): ?array
 {
     if (empty($_SESSION['crm_user_id'])) return null;
+    if (isset($_SESSION['crm_session_expires_at']) && (int) $_SESSION['crm_session_expires_at'] < time()) {
+        $_SESSION = [];
+        return null;
+    }
+    $_SESSION['crm_session_expires_at'] ??= time() + CRM_SESSION_LIFETIME;
     static $user;
     if (is_array($user)) return $user;
     $stmt = db()->prepare('SELECT id, email, full_name FROM crm_users WHERE id = ? AND is_active = 1');
     $stmt->execute([(int) $_SESSION['crm_user_id']]);
     $user = $stmt->fetch() ?: null;
     if (!$user) unset($_SESSION['crm_user_id']);
+    if ($user) refresh_crm_session_cookie();
     return $user;
 }
 function require_login(): void
@@ -82,6 +102,8 @@ function login_user(array $user): void
 {
     session_regenerate_id(true);
     $_SESSION['crm_user_id'] = (int) $user['id'];
+    $_SESSION['crm_session_expires_at'] = time() + CRM_SESSION_LIFETIME;
+    refresh_crm_session_cookie();
 }
 
 function add_activity(int $prospectId, string $type, string $note = '', ?string $date = null): void
