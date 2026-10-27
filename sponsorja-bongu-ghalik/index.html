@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sponsorja Bonġu Għalik | Diski Maltin għall-Familji</title>
-  <meta name="description" content="Irreklama ma’ Kikku fuq Facebook għal €350: branding naturali fix-xena u garanzija ta’ 50,000 video view.">
+  <meta name="description" content="Irreklama ma’ Kikku fuq Facebook: branding naturali fix-xena u garanzija ta’ 50,000 video view.">
   <link rel="canonical" href="https://kikkumalti.com/sponsorja-bongu-ghalik/">
   <link rel="alternate" hreflang="mt" href="https://kikkumalti.com/sponsorja-bongu-ghalik/">
   <link rel="alternate" hreflang="en" href="https://kikkumalti.com/en/sponsor-bongu-ghalik/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Sponsorja Bonġu Għalik | Kikku">
-  <meta property="og:description" content="50,000 video view fuq Facebook għal €350, jew reels sponsorjati addizzjonali sakemm tintlaħaq il-mira.">
+  <meta property="og:description" content="50,000 video view fuq Facebook, jew reels sponsorjati addizzjonali sakemm tintlaħaq il-mira.">
   <meta property="og:url" content="https://kikkumalti.com/sponsorja-bongu-ghalik/">
   <meta property="og:image" content="https://kikkumalti.com/assets/kikku-booklet-share.jpg">
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-LRBWYZP03E"></script>
@@ -38,10 +38,10 @@
       <div class="wrap hero-grid">
         <div>
           <span class="eyebrow">Bonġu Għalik · Opportunità ta’ reklamar fuq Facebook</span>
-          <h1>50,000 video view fuq Facebook għal €350.</h1>
+          <h1>50,000 video view fuq Facebook. Garantiti.</h1>
           <p class="lead">Daħħal il-brand tiegħek b’mod naturali f’reel ta’ Bonġu Għalik, flimkien mal-mużika u l-karattri li jgawdu l-familji.</p>
           <div class="actions">
-            <a class="button" href="#ikkuntattja">Ibda għal €350</a><a class="text-link" href="#ezempji">Ara eżempji</a>
+            <a class="button" href="#ikkuntattja">Itlob id-dettalji tas-sponsorja</a><a class="text-link" href="#ezempji">Ara eżempji</a>
           </div>
         </div>
         <div class="preview" aria-label="Previżjoni illustrattiva tal-post tas-sponsor">
@@ -88,16 +88,16 @@
         <div class="copy">
           <span class="eyebrow">Pass sempliċi li jmiss</span>
           <h2>Lest biex idaħħal il-brand tiegħek fix-xena?</h2>
-          <p>Ħalli d-dettalji tiegħek u Chris jikkonferma ż-żmien u l-artwork għall-kampanja tiegħek ta’ €350.</p>
+          <p>Ħalli d-dettalji tiegħek u Chris jaqsam l-offerta introduttorja, iż-żmien u l-għażliet għall-artwork.</p>
         </div>
         <div class="form-card">
-          <h2>Ibda s-sponsorja tiegħek ta’ €350</h2>
+          <h2>Itlob id-dettalji tas-sponsorja</h2>
           <form id="enquiry-form" action="../partnership-enquiry.php" method="post" novalidate="" name="enquiry-form">
             <input type="hidden" name="language" value="mt"><input type="hidden" name="enquiry_source" value="Bongu Ghalik sponsorship"><input id="form-started" type="hidden" name="form_started">
             <div class="honeypot" aria-hidden="true">
               <label for="website">Website</label><input id="website" name="website" tabindex="-1" autocomplete="off">
             </div><label for="name">Isem *</label><input id="name" name="name" autocomplete="name" maxlength="120" required=""><label for="business">Negozju / organizzazzjoni *</label><input id="business" name="business" autocomplete="organization" maxlength="160" required=""><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" required=""><label for="idea">Hemm xi ħaġa li tixtieq tgħidilna?</label>
-            <textarea id="idea" name="idea" maxlength="5000"></textarea><button id="submit" class="button" type="submit">Ibda għal €350</button>
+            <textarea id="idea" name="idea" maxlength="5000"></textarea><button id="submit" class="button" type="submit">Itlob id-dettalji tas-sponsorja</button>
           </form>
           <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
           <p class="reassurance">Konverżazzjoni inizjali, mingħajr obbligu.</p><p class="privacy">Nużaw dawn id-dettalji biss biex inwieġbu l-mistoqsija tiegħek. Ara n-<a href="../privatezza/">nota dwar il-privatezza</a>.</p>
@@ -109,7 +109,7 @@
     <p>Magħmul b’♥ għat-tfal li jħobbu l-mużika · <a href="./">Sponsorja Bonġu Għalik</a> · Kikkumalti © 2026</p>
   </footer>
   <script>
-  const form=document.getElementById('enquiry-form'),submit=document.getElementById('submit'),status=document.getElementById('form-status');document.getElementById('form-started').value=Math.floor(Date.now()/1000);document.querySelector('.video-trigger').addEventListener('click',event=>{const id=event.currentTarget.dataset.videoId,frame=event.currentTarget.closest('.video-frame');frame.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Bonġu Għalik" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`});form.addEventListener('input',e=>e.target.removeAttribute('aria-invalid'));form.addEventListener('submit',async e=>{e.preventDefault();const invalid=form.querySelector(':invalid');if(invalid){invalid.setAttribute('aria-invalid','true');status.className='form-status error';status.textContent='Jekk jogħġbok imla l-parti mmarkata qabel tibgħat.';invalid.focus();return}submit.disabled=true;submit.textContent='Qed nibagħtu…';status.textContent='';try{const response=await fetch(form.action,{method:'POST',body:new FormData(form)}),data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.message||'Ma rnexxilniex nibagħtu l-mistoqsija. Erġa’ pprova.');status.className='form-status success';status.textContent=data.message;form.reset();document.getElementById('form-started').value=Math.floor(Date.now()/1000);if(typeof gtag==='function')gtag('event','generate_lead',{lead_source:'bongu_ghalik_sponsorship',language:'mt'})}catch(error){status.className='form-status error';status.textContent=error.message}finally{submit.disabled=false;submit.textContent='Ibda għal €350'}});
+  const form=document.getElementById('enquiry-form'),submit=document.getElementById('submit'),status=document.getElementById('form-status');document.getElementById('form-started').value=Math.floor(Date.now()/1000);document.querySelector('.video-trigger').addEventListener('click',event=>{const id=event.currentTarget.dataset.videoId,frame=event.currentTarget.closest('.video-frame');frame.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Bonġu Għalik" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`});form.addEventListener('input',e=>e.target.removeAttribute('aria-invalid'));form.addEventListener('submit',async e=>{e.preventDefault();const invalid=form.querySelector(':invalid');if(invalid){invalid.setAttribute('aria-invalid','true');status.className='form-status error';status.textContent='Jekk jogħġbok imla l-parti mmarkata qabel tibgħat.';invalid.focus();return}submit.disabled=true;submit.textContent='Qed nibagħtu…';status.textContent='';try{const response=await fetch(form.action,{method:'POST',body:new FormData(form)}),data=await response.json().catch(()=>({}));if(!response.ok)throw new Error(data.message||'Ma rnexxilniex nibagħtu l-mistoqsija. Erġa’ pprova.');status.className='form-status success';status.textContent=data.message;form.reset();document.getElementById('form-started').value=Math.floor(Date.now()/1000);if(typeof gtag==='function')gtag('event','generate_lead',{lead_source:'bongu_ghalik_sponsorship',language:'mt'})}catch(error){status.className='form-status error';status.textContent=error.message}finally{submit.disabled=false;submit.textContent='Itlob id-dettalji tas-sponsorja'}});
   document.querySelectorAll('.video-gallery .video-trigger').forEach(trigger=>trigger.addEventListener('click',event=>{if(event.currentTarget.closest('.video-frame').querySelector('iframe'))return;const id=event.currentTarget.dataset.videoId,frame=event.currentTarget.closest('.video-frame');frame.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" title="Bonġu Għalik" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`}));
   document.querySelectorAll('[data-video-choice]').forEach(choice=>choice.addEventListener('click',event=>{const index=Number(event.currentTarget.dataset.videoChoice);document.querySelectorAll('[data-video-choice]').forEach(button=>button.setAttribute('aria-selected',String(button===event.currentTarget)));document.querySelectorAll('.video-gallery .video-frame').forEach((frame,frameIndex)=>frame.classList.toggle('is-active',frameIndex===index))}));
   </script>
