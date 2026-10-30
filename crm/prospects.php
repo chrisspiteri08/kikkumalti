@@ -3,7 +3,7 @@ require __DIR__ . '/layout.php';
 require_login();
 $sportslinkDraft = static function (array $prospect): string {
     $name = trim((string)$prospect['prospect']);
-    return "Hello,\n\nI’m Chris Spiteri, founder of Sportslink, a local cooperative supporting Maltese sport and athletes.\n\nI’d like to invite {$name} to join the Sportslink Network: a free, no-obligation network that connects Maltese businesses with sportspeople looking for partnership opportunities.\n\nBy joining, {$name} can discover athletes and sporting opportunities relevant to the brand, and explore potential partnerships directly where there is a good fit. There is no fee and no obligation to sponsor anyone.\n\nYou can see how the Network works here:\nhttps://sportslink.mt/network/\n\nBest,\nChris Spiteri\nFounder, Sportslink\nMob/WhatsApp: +356 9904 9798\nhttps://sportslink.mt/";
+    return "Good morning,\n\nI’m Chris Spiteri, co-founder of Sportslink, a local cooperative supporting Maltese sport and athletes.\n\nWe’re continuing to grow the Sportslink Network, which already brings together Maltese businesses and sportspeople to explore partnership opportunities. I’d be pleased to invite {$name} to be part of it.\n\nThe Network is free and carries no obligation. It gives businesses a straightforward way to discover sportspeople and sporting opportunities relevant to their brand, then explore a partnership directly where there is a good fit.\n\nYou can see how the Network works here:\nhttps://sportslink.mt/network/\n\nBest,\nChris Spiteri\nFounder, Sportslink\nMob/WhatsApp: +356 9904 9798\nhttps://sportslink.mt/";
 };
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_sam_network_drafts') {
     verify_csrf();
