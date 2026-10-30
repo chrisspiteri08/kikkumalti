@@ -5,7 +5,7 @@ $samNetworkCta = "Rather than arranging a meeting, I’d like to invite you to j
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'update_sam_network_ctas') {
     verify_csrf();
     $pdo = db();
-    $stmt = $pdo->prepare("SELECT d.id, d.body FROM outreach_drafts d INNER JOIN prospects p ON p.id = d.prospect_id WHERE p.opportunity_type = ? AND p.status = 'Draft Saved' AND d.status = 'Draft'");
+    $stmt = $pdo->prepare("SELECT d.id, d.body FROM outreach_drafts d INNER JOIN prospects p ON p.id = d.prospect_id WHERE p.opportunity_type = ? AND p.status = 'Draft Saved'");
     $stmt->execute(['Sports sponsorship — Sam Cassar']);
     $update = $pdo->prepare('UPDATE outreach_drafts SET body = ? WHERE id = ?');
     $updated = 0; $unchanged = 0;
