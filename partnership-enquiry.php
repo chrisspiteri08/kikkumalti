@@ -48,11 +48,12 @@ $business = trim((string) ($_POST['business'] ?? ''));
 $email = filter_var(trim((string) ($_POST['email'] ?? '')), FILTER_VALIDATE_EMAIL);
 $interest = trim((string) ($_POST['interest'] ?? 'General collaboration enquiry'));
 $idea = trim((string) ($_POST['idea'] ?? ''));
+$budgetTiming = trim((string) ($_POST['budget_timing'] ?? ''));
 $source = trim((string) ($_POST['enquiry_source'] ?? ''));
 $isSponsorship = $source === 'Bongu Ghalik sponsorship';
 $allowedInterests = ['Series sponsorship', 'Original song and animation', 'Seasonal campaign', 'Educational collaboration', 'Other / not sure yet'];
 
-if ($name === '' || mb_strlen($name) > 120 || $business === '' || mb_strlen($business) > 160 || $email === false || ($interest !== 'General collaboration enquiry' && !in_array($interest, $allowedInterests, true)) || (!$isSponsorship && $idea === '') || mb_strlen($idea) > 5000 || preg_match('/[\r\n]/', $name.$business)) {
+if ($name === '' || mb_strlen($name) > 120 || $business === '' || mb_strlen($business) > 160 || $email === false || ($interest !== 'General collaboration enquiry' && !in_array($interest, $allowedInterests, true)) || (!$isSponsorship && $idea === '') || mb_strlen($idea) > 5000 || mb_strlen($budgetTiming) > 250 || preg_match('/[\r\n]/', $name.$business)) {
     reply(422, $messages[$language]['invalid']);
 }
 
@@ -76,6 +77,7 @@ $body = "A new partnership enquiry was submitted on kikkumalti.com.\n\n"
     . "Business / organisation: {$business}\n"
     . "Email: {$email}\n"
     . "Interested in: {$interest}\n"
+    . "Budget / timing: " . ($budgetTiming !== '' ? $budgetTiming : 'Not provided') . "\n"
     . "Enquiry source: " . ($source !== '' ? $source : 'Website') . "\n"
     . "Language: {$language}\n\n"
     . "Idea:\n{$idea}\n";
