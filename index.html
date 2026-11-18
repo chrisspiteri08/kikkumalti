@@ -157,12 +157,18 @@
     .hero-action-song:hover { background: #d94d9b; }
     .hero-action-youtube { background: #ff0033; border-color: #ff0033; color: #fff; box-shadow: 0 10px 26px rgba(255,0,51,0.28); }
     .hero-action-youtube:hover { background: #ff0033; }
+    .hero-action-preorder { background: #b8d73d; border-color: #b8d73d; color: #172544; box-shadow: 0 10px 26px rgba(184,215,61,0.22); }
+    .hero-action-preorder:hover { background: #a9c72f; }
     .record-stage {
       min-height: 390px;
       position: relative;
       display: grid;
       place-items: center;
     }
+    .book-stage { min-height: 390px; position: relative; display: grid; place-items: center; }
+    .book-stage::before { content: ''; position: absolute; inset: 9% 3% 4%; border-radius: 28px; background: linear-gradient(135deg, #f5c887, #9f633c); transform: rotate(3deg); opacity: .35; }
+    .book-stage img { position: relative; width: min(470px, 100%); border: 7px solid #fff4e4; border-radius: 22px; box-shadow: 0 25px 50px rgba(0,0,0,.34); transform: rotate(2deg); }
+    .preorder-badge { position: absolute; z-index: 2; right: 0; bottom: 7%; padding: .65rem .85rem; border: 3px solid #fff; border-radius: 16px; background: var(--accent); color: #fff; font-size: .9rem; font-weight: 900; box-shadow: 0 8px 0 rgba(23,37,68,.55); transform: rotate(-4deg); }
     .record-disc {
       position: absolute;
       right: -10px;
@@ -702,6 +708,9 @@
       .hero-actions { align-items: stretch; }
       .hero-action { width: 100%; min-height: 54px; padding: 0.9rem 1.1rem; font-size: 1rem; }
       .record-stage { min-height: 270px; }
+      .book-stage { min-height: 275px; }
+      .book-stage img { width: min(410px, 96%); border-width: 5px; }
+      .preorder-badge { right: 2%; bottom: 4%; font-size: .8rem; }
       .record-disc { width: 220px; right: 8px; }
       .kikku-character { width: 220px; left: 0; bottom: -25px; }
       .sound-chip { font-size: 0.7rem; }
@@ -739,20 +748,18 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-inner">
       <div class="hero-copy">
-        <span class="eyebrow">Merħba fid-dinja ta' Kikku</span>
-        <h1 id="hero-title">Diski, stejjer u attivitajiet bil-Malti għat-tfal.</h1>
-        <p>Kontenut divertenti u riżorsi utli għall-ġenituri, dawk li jieħdu ħsieb it-tfal, u l-edukaturi.</p>
+        <span class="eyebrow">Hemm Stilla Għalik</span>
+        <h1 id="hero-title">Kanzunetta ġdida u ktieb ġdid mingħand Kikku.</h1>
+        <p>Isma' <strong>“Hemm Stilla Għalik”</strong>, imbagħad agħmel pre-order tal-ktieb il-ġdid bi prezz speċjali.</p>
         <div class="hero-actions" aria-label="Ibda minn hawn">
-          <button class="hero-action hero-action-song" id="featuredSongButton" type="button"><span aria-hidden="true">▶</span> Isma' “Għaxar Għasafar fuq il-Bejt”</button>
+          <button class="hero-action hero-action-song" id="featuredSongButton" type="button"><span aria-hidden="true">▶</span> Isma' “Hemm Stilla Għalik”</button>
           <a class="hero-action hero-action-youtube" href="https://www.youtube.com/@KikkuMalti?sub_confirmation=1" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> Subscribe fuq YouTube</a>
+          <a class="hero-action hero-action-preorder" href="mailto:website@kikkumalti.com?subject=Pre-order%20Hemm%20Stilla%20G%C4%A7alik">Agħmel pre-order tal-ktieb · €20</a>
         </div>
       </div>
-      <div class="record-stage" aria-hidden="true">
-        <div class="record-disc"></div>
-        <img class="kikku-character" src="assets/kikku-headphones.png" alt="">
-        <span class="sound-chip chip-one">Kanta</span>
-        <span class="sound-chip chip-two">Ilgħab</span>
-        <span class="sound-chip chip-three">Tgħallem</span>
+      <div class="book-stage">
+        <img src="assets/hemm-stilla-ghalik-book-mockup.png" alt="Il-ktieb Hemm Stilla Għalik ta' Kikku">
+        <span class="preorder-badge">Pre-order speċjali<br>€20</span>
       </div>
     </div>
   </section>
